@@ -4,11 +4,8 @@ using UnityEngine;
 public class SpaceshipController : MonoBehaviour
 {
     public float thrustForce = 5000f; // Lower force for smoother acceleration
-    public float rotationForce = 5000f; // Less sensitive rotation
+    public float rotationForce = 500000000000000f; // Less sensitive rotation
     public float maxSpeed = 50f; // Limit spaceship speed
-    public float dragFactor = 0.999f; // Slow down movement naturally
-    public float angularDragFactor = 0.999f; // Slow down rotation naturally
-
     private Rigidbody rb;  
 
     void Start()
@@ -44,8 +41,6 @@ public class SpaceshipController : MonoBehaviour
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
         }
 
-        // Apply slight drag for smooth stopping
-        rb.linearVelocity *= dragFactor;
     }
 
     void HandleRotation()
@@ -54,12 +49,9 @@ public class SpaceshipController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * rotationForce;
 
         // Smooth, less sensitive rotation
-        Vector3 torque = new Vector3(-mouseY, mouseX, 0) * Time.deltaTime;
+        Vector3 torque = new Vector3(0, mouseX, mouseY) * Time.deltaTime;
 
         // Apply torque for rotation
         rb.AddTorque(torque, ForceMode.Force);
-
-        // Apply angular drag for smooth stopping
-        rb.angularVelocity *= angularDragFactor;
     }
 }

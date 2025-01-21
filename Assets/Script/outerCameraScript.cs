@@ -8,8 +8,7 @@ public class outerCameraScript : MonoBehaviour
     
     void Start()
     {
-        offset = transform.postion - player.transform.position;
-
+        offset = transform.position - player.transform.position;
     }
 
     // Update is called once per frame
