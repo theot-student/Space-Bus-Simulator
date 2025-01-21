@@ -4,9 +4,10 @@ using UnityEngine;
 public class SpaceshipController : MonoBehaviour
 {
     public float thrustForce = 5000f; // Lower force for smoother acceleration
-    public float rotationForce = 500000000000000f; // Less sensitive rotation
+    public float rotationForce = 1f; // Less sensitive rotation
     public float maxSpeed = 50f; // Limit spaceship speed
     private Rigidbody rb;  
+    public Animator animator;
 
     void Start()
     {
@@ -18,6 +19,9 @@ public class SpaceshipController : MonoBehaviour
 
     void Update()
     {
+        bool isPlayingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("launching");
+        // Active ou désactive le mode kinematic
+        rb.isKinematic = isPlayingAnimation;
         HandleMovement();
         HandleRotation();
     }
@@ -33,7 +37,7 @@ public class SpaceshipController : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) forceDirection -= transform.forward; // Right
 
         // Apply force gradually over time
-        rb.AddForce(forceDirection.normalized * thrustForce * Time.deltaTime, ForceMode.Force);
+        rb.AddForce(forceDirection.normalized * thrustForce * Time.deltaTime);
 
         // Limit maximum speed to prevent excessive acceleration
         if (rb.linearVelocity.magnitude > maxSpeed)
@@ -49,7 +53,7 @@ public class SpaceshipController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * rotationForce;
 
         // Smooth, less sensitive rotation
-        Vector3 torque = new Vector3(0, mouseX, mouseY) * Time.deltaTime;
+        Vector3 torque = mouseX * transform.up + mouseY * transform.forward;
 
         // Apply torque for rotation
         rb.AddTorque(torque, ForceMode.Force);
