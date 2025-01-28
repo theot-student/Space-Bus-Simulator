@@ -26,7 +26,7 @@ public class SpaceshipController : MonoBehaviour
     {
         bool isPlayingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("launching");
         // Active ou désactive le mode kinematic
-        rb.isKinematic = isPlayingAnimation;
+        rb.isKinematic = isPlayingAnimation || !player.isDriving;
         if (wantToLand) {
             HandleLanding();
         } else {

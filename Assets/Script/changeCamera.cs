@@ -14,7 +14,7 @@ public class changeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space")){
+        if (Input.GetKeyDown("c")){
         if (outerCamera.enabled){
         	innerCamera.enabled=true;
 		outerCamera.enabled=false;	

@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class innerCameraScript : MonoBehaviour
+public class InnerCameraScript : MonoBehaviour
 {
-
     public GameObject player;
-    public GameObject spaceship;
+    public Transform head; // Assign this in the Inspector
+    public float heightOffset = 0.09f; // Adjust this value to move the camera up
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        transform.position = player.transform.position + transform.up;
+        if (head != null)
+        {
+            // Move the camera slightly above the head
+            transform.position = head.position + Vector3.up * heightOffset;
+        }
+        else
+        {
+            Debug.LogWarning("Head transform is not assigned!");
+        }
     }
 }
