@@ -5,12 +5,14 @@ public class LandColliderScript : MonoBehaviour
     // “other” refers to the collider on the GameObject inside this trigger
     void OnTriggerEnter (Collider other)
     {
-        other.GameObject
+        SpaceshipController spaceshipController = other.gameObject.GetComponent<SpaceshipController>();
+        spaceshipController.canLand = true;
     }
 
     
     void OnTriggerExit (Collider other)
     {
-        Debug.Log ("A collider has exited the DoorObject trigger");
+        SpaceshipController spaceshipController = other.gameObject.GetComponent<SpaceshipController>();
+        spaceshipController.canLand = false;
     }
 }

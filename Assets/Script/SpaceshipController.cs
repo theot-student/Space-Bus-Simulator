@@ -10,8 +10,10 @@ public class SpaceshipController : MonoBehaviour
     private Rigidbody rb;  
     public Animator animator;
     public Player player;
-    public bool canLaunch = true;
+    public bool canLaunch = false;
     public bool canLand = false;
+    private wantToLand = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,11 +27,29 @@ public class SpaceshipController : MonoBehaviour
         bool isPlayingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("launching");
         // Active ou désactive le mode kinematic
         rb.isKinematic = isPlayingAnimation;
-        HandleMovement();
-        HandleRotation();
+        if wantToLand {
+            HandleLanding();
+        } else {
+            HandleMovement();
+            HandleRotation();
+            landing();
+        }
+        
+        
     }
 
+    void HandleLanding() {
+        // remettre le vaisseau droit
+            
+        // lancer l'animation d'atterissage
 
+    }
+
+    void landing() {
+        if Input.GetKey(KeyCode.shift) and canLand {
+            wantToLand = true;
+        }
+    }
 
     void HandleMovement()
     {
