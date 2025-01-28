@@ -6,13 +6,16 @@ public class outerCameraScript : MonoBehaviour
     public GameObject player;
     private Vector3 v;
     float x, y, z;
+
+
     void Start()
     {
+        Cursor.visible = false;
         Vector3 offset = transform.position - player.transform.position;
         x = offset.x;
         y = offset.y;
         z = offset.z;
-            }
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,6 +30,6 @@ public class outerCameraScript : MonoBehaviour
     
     void LateUpdate(){
         transform.position = v + player.transform.position;  
-        transform.LookAt(player.transform.position + elevation * player.transform.up);
+        transform.LookAt(player.transform.position + elevation * player.transform.up,player.transform.up);
     }
 }
