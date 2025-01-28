@@ -5,16 +5,14 @@ public class outerCameraScript : MonoBehaviour
     public float elevation;
     public GameObject player;
     private Vector3 v;
-    float x, y, z;
+    public float x = -2.5f;
+    public float y = 1f;
+    public float z = 0f;
 
 
     void Start()
     {
         Cursor.visible = false;
-        Vector3 offset = transform.position - player.transform.position;
-        x = offset.x;
-        y = offset.y;
-        z = offset.z;
     }
 
     // Update is called once per frame
