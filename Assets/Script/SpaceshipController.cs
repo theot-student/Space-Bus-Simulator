@@ -6,6 +6,7 @@ public class SpaceshipController : MonoBehaviour
     public float thrustForce = 5000f; // Lower force for smoother acceleration
     public float rotationForce = 1f; // Less sensitive rotation
     public float maxSpeed = 50f; // Limit spaceship speed
+    public float rotationSpeed = 1f;
     private Rigidbody rb;  
     public Animator animator;
 
@@ -29,13 +30,10 @@ public class SpaceshipController : MonoBehaviour
     void HandleMovement()
     {
         Vector3 forceDirection = Vector3.zero;
-
         // Adjusted for AZERTY keyboard (Z = W in Unity)
         if (Input.GetKey(KeyCode.W)) forceDirection += transform.right; // Forward (Z on AZERTY)
         if (Input.GetKey(KeyCode.S)) forceDirection -=transform.right;  // Backward
-        if (Input.GetKey(KeyCode.A)) forceDirection += transform.forward; // Left
-        if (Input.GetKey(KeyCode.D)) forceDirection -= transform.forward; // Right
-
+        
         // Apply force gradually over time
         rb.AddForce(forceDirection.normalized * thrustForce * Time.deltaTime);
 
@@ -49,11 +47,15 @@ public class SpaceshipController : MonoBehaviour
 
     void HandleRotation()
     {
+        Vector3 torque = Vector3.zero;
+        if (Input.GetKey(KeyCode.A)) torque += rotationSpeed * transform.right;
+        if (Input.GetKey(KeyCode.D)) torque -= rotationSpeed * transform.right;
+
         float mouseX = Input.GetAxis("Mouse X") * rotationForce;
         float mouseY = Input.GetAxis("Mouse Y") * rotationForce;
 
         // Smooth, less sensitive rotation
-        Vector3 torque = mouseX * transform.up + mouseY * transform.forward;
+        torque += mouseX * transform.up + mouseY * transform.forward;
 
         // Apply torque for rotation
         rb.AddTorque(torque, ForceMode.Force);

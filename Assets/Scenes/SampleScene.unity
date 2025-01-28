@@ -993,6 +993,7 @@ MonoBehaviour:
   thrustForce: 10000
   rotationForce: 1
   maxSpeed: 5
+  rotationSpeed: 0.1
   animator: {fileID: 1991901178}
 --- !u!136 &1991901181
 CapsuleCollider:
