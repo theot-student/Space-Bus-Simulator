@@ -9,7 +9,8 @@ public class SpaceshipController : MonoBehaviour
     public float rotationSpeed = 1f;
     private Rigidbody rb;  
     public Animator animator;
-
+    public bool canLaunch = true;
+    public bool canLand = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,7 +26,10 @@ public class SpaceshipController : MonoBehaviour
         rb.isKinematic = isPlayingAnimation;
         HandleMovement();
         HandleRotation();
+        //HandleLandCollider();
     }
+
+
 
     void HandleMovement()
     {
