@@ -12,7 +12,7 @@ public class SpaceshipController : MonoBehaviour
     public Player player;
     public bool canLaunch = false;
     public bool canLand = false;
-    private wantToLand = false;
+    private bool wantToLand = false;
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class SpaceshipController : MonoBehaviour
         bool isPlayingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("launching");
         // Active ou désactive le mode kinematic
         rb.isKinematic = isPlayingAnimation;
-        if wantToLand {
+        if (wantToLand) {
             HandleLanding();
         } else {
             HandleMovement();
@@ -46,7 +46,7 @@ public class SpaceshipController : MonoBehaviour
     }
 
     void landing() {
-        if Input.GetKey(KeyCode.shift) and canLand {
+        if (Input.GetKey(KeyCode.LeftShift) && canLand) {
             wantToLand = true;
         }
     }
