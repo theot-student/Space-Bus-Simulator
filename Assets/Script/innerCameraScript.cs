@@ -4,6 +4,7 @@ public class innerCameraScript : MonoBehaviour
 {
 
     public GameObject player;
+    public GameObject spaceship;
 
     void Start()
     {
@@ -13,6 +14,6 @@ public class innerCameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = player.transform.position + transform.up;
     }
 }
