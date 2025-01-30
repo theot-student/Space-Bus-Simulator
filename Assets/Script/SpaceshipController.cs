@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
 {
-    public float thrustForce = 5000f; // Lower force for smoother acceleration
-    public float rotationForce = 1f; // Less sensitive rotation
-    public float maxSpeed = 50f; // Limit spaceship speed
-    public float rotationSpeed = 0.1f;
+    public float thrustForce = 50000f; // Lower force for smoother acceleration
+    public float rotationForce = 0.5f; // Less sensitive rotation
+    public float maxSpeed = 20f; // Limit spaceship speed
+    public float rotationSpeed = 0.03f;
     private Rigidbody rb;  
     public Animator animator;
     public Player player;

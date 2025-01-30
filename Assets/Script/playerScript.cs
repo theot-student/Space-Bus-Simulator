@@ -1,14 +1,21 @@
 using UnityEngine;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
     public bool isDriving = false;
     public GameObject innerCamera;
-    public GameObject spaceship;
+    public SpaceshipController spaceship;
+    private Animator spaceshipAnimator;
+
     private CharacterController controller;
     private Animator animator; // Animator component
     private Vector3 velocity;
     private float speedVelocity;
+    public TextMeshProUGUI textOnScreen;
+    private bool withinReachToShip = false;
+
+    public Transform driverSeat; // Assign the driver's seat Transform in the Inspector
+
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.5f;
@@ -17,10 +24,12 @@ public class Player : MonoBehaviour
 
     private float rotationX = 0f;
 
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>(); // Get Animator component
+        spaceshipAnimator = spaceship.GetComponent<Animator>();
 
         if (controller == null)
         {
@@ -29,16 +38,34 @@ public class Player : MonoBehaviour
         }
 
         controller.enabled = true;
+        textOnScreen.text = ""; 
     }
 
-    void Update()
+void Update()
+{
+    if (!isDriving)
     {
-        if (!isDriving)
+        HandleMovement();
+        HandleRotation();
+        if (withinReachToShip && Input.GetKey(KeyCode.E))
         {
-            HandleMovement();
-            HandleRotation();
+            isDriving = true;
+            spaceshipAnimator.SetBool("isDriven", true);
+            HideMessage();
         }
     }
+    else
+    {
+        // Move player to the driver's seat inside the spaceship
+        transform.position = spaceship.transform.position;
+        transform.rotation = spaceship.transform.rotation; // Align player with spaceship
+
+        // Disable movement components
+        animator.enabled = false;
+        controller.enabled = false;
+        
+    }
+}
 
     void HandleMovement()
     {
@@ -84,4 +111,32 @@ public class Player : MonoBehaviour
 
         innerCamera.transform.localRotation = Quaternion.Euler(rotationX, transform.eulerAngles.y, 0f);
     }
+    void HideMessage()
+    {
+        textOnScreen.text = "";
+    }
+    public void ShowMessage(string message, float duration = 2f)
+    {
+        textOnScreen.text = message;
+        Invoke(nameof(HideMessage), duration);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!isDriving && other.transform.gameObject.name == spaceship.name)
+        {
+            ShowMessage("Appuyez sur 'E' pour rentrer dans votre SpaceBus");
+            withinReachToShip = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other){
+        if (!isDriving && other.transform.gameObject.name == spaceship.name)
+        {
+            HideMessage();
+            withinReachToShip = false;
+        }
+    }
+
+    
 }

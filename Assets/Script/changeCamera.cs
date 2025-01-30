@@ -4,7 +4,7 @@ public class changeCamera : MonoBehaviour
 {
     public Camera innerCamera;
     public Camera outerCamera;
-    
+    public GameObject player;
     void Start()
     {
         outerCamera.enabled=true;
@@ -15,15 +15,27 @@ public class changeCamera : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("c")){
-        if (outerCamera.enabled){
-        	innerCamera.enabled=true;
-		outerCamera.enabled=false;	
-	}
-        else {
-        	outerCamera.enabled=true;
-        	innerCamera.enabled=false;
-        	
+            if (outerCamera.enabled){
+                innerCamera.enabled=true;
+                outerCamera.enabled=false;	
+                Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
+                foreach (Renderer rend in renderers)
+                {
+                    rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                }
+
+                
         }
+            else {
+                outerCamera.enabled=true;
+                innerCamera.enabled=false;
+                Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
+                foreach (Renderer rend in renderers)
+                {
+                    rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+                }
+                
+            }
         }
         
     }
