@@ -11,7 +11,8 @@ public class InnerCameraScript : MonoBehaviour
         if (head != null)
         {
             // Move the camera slightly above the head
-            transform.position = head.position + Vector3.up * heightOffset;
+            transform.position = head.position + head.up * heightOffset;
+            transform.rotation = head.rotation;
         }
         else
         {

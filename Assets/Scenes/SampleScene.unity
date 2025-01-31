@@ -742,8 +742,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
-  far clip plane: 3
+  near clip plane: 0.03
+  far clip plane: 1000
   field of view: 80
   orthographic: 0
   orthographic size: 5
@@ -1429,7 +1429,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -7029948723529949830, guid: fa61aef7f969e94da85ef3b25dab8be1, type: 3}
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fa61aef7f969e94da85ef3b25dab8be1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1588808198}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fa61aef7f969e94da85ef3b25dab8be1, type: 3}
       insertIndex: -1
@@ -1517,7 +1520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1588808198
 Transform:
   m_ObjectHideFlags: 0
@@ -1526,13 +1529,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588808197}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0027925079, y: -0, z: -0, w: 0.9999961}
-  m_LocalPosition: {x: 0.6579, y: 0.1392, z: -0.6671}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.042158, y: 0.00806, z: 0}
+  m_LocalScale: {x: 0.003, y: 0.0029999998, z: 0.0029999998}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.32, y: 0, z: 0}
+  m_Father: {fileID: 1991901184}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1588808199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,7 +1543,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588808197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acc36dd1b742851489dbaa69c61c2370, type: 3}
   m_Name: 
@@ -1564,10 +1567,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 21.53}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1676296304 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5187642819031258360, guid: ee5f5aea082ff57168cbf7c02b131a47, type: 3}
@@ -1936,4 +1939,3 @@ SceneRoots:
   - {fileID: 518556175}
   - {fileID: 2592105}
   - {fileID: 338315000}
-  - {fileID: 1588808198}

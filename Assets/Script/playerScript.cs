@@ -57,8 +57,8 @@ void Update()
     else
     {
         // Move player to the driver's seat inside the spaceship
-        transform.position = spaceship.transform.position;
-        transform.rotation = spaceship.transform.rotation; // Align player with spaceship
+        transform.position = driverSeat.transform.position;
+        transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
 
         // Disable movement components
         animator.enabled = false;
