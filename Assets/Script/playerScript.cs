@@ -138,5 +138,10 @@ void Update()
         }
     }
 
-    
+    public void exitShip(Vector3 shipPosition){
+        animator.enabled = true;
+        controller.enabled = true;
+
+        transform.position = shipPosition + new Vector3(0,0,6);
+    }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LandColliderScript : MonoBehaviour
 {
-    public Vector3 landingAera = new Vector3(0,0,0);
+    public Vector3 landingAera = new Vector3(0,0.2f,0);
     // “other” refers to the collider on the GameObject inside this trigger
     void OnTriggerEnter (Collider other)
     {

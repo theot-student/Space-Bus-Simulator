@@ -305,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc2ea0b4a59d44ebb86899c1f72c78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.061
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc2ea0b4a59d44ebb86899c1f72c78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1878,9 +1878,11 @@ MonoBehaviour:
   canLand: 0
   landingPosition: {x: 0, y: 0, z: 0}
   landingRotationSpeed: 2
-  landingSpeed: 2
+  landingSpeed: 50
+  landingSpeed2: 1
+  launchingSpeed: 1
   rotationTol: 2
-  positionTol: 0.3
+  positionTol: 1
 --- !u!136 &1991901181
 CapsuleCollider:
   m_ObjectHideFlags: 0
