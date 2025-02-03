@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27508f9cd22c06b8c8807fdf9e8a0820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  landingAera: {x: 0, y: 0, z: 0}
 --- !u!65 &2592104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 2592102}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1173,7 +1174,7 @@ Transform:
   m_GameObject: {fileID: 565853072}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22528899, y: -0.29, z: 0.18136163}
+  m_LocalPosition: {x: 0.22528899, y: -0.15, z: 0.18136163}
   m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1875,6 +1876,11 @@ MonoBehaviour:
   player: {fileID: 140528550}
   canLaunch: 1
   canLand: 0
+  landingPosition: {x: 0, y: 0, z: 0}
+  landingRotationSpeed: 2
+  landingSpeed: 2
+  rotationTol: 2
+  positionTol: 0.3
 --- !u!136 &1991901181
 CapsuleCollider:
   m_ObjectHideFlags: 0

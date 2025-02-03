@@ -13,41 +13,73 @@ public class SpaceshipController : MonoBehaviour
     public bool canLaunch = false;
     public bool canLand = false;
     private bool wantToLand = false;
-
+    Quaternion initialRotation = Quaternion.Euler(0, 0, 0);
+    public Vector3 landingPosition = new Vector3(0,0,0);
+    public float landingRotationSpeed = 2f;
+    public float landingSpeed = 2f;
+    public float rotationTol = 2f;
+    public float positionTol = 0.3f;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false; // Disable gravity for space movement
         rb.linearDamping = 0.5f; // Helps prevent excessive drifting
         rb.angularDamping = 0.5f; // Helps slow down rotation
+        initialRotation = transform.rotation;
     }
 
     void Update()
     {
-        bool isPlayingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("launching");
+        bool isPlayingLaunchingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door closing");
+
         // Active ou désactive le mode kinematic
-        rb.isKinematic = isPlayingAnimation || !player.isDriving;
-        if (wantToLand) {
-            HandleLanding();
-        } else {
-            HandleMovement();
-            HandleRotation();
-            landing();
+        if (isPlayingLaunchingAnimation){
+            Vector3 targetLaunching = transform.position + new Vector3(0,2,0);
+            MoveTowardsTarget(rb, targetLaunching, landingSpeed);
+        } else if (player.isDriving) {
+                if (wantToLand) {
+                    HandleLanding();
+                } else {
+                    HandleMovement();
+                    HandleRotation();
+                    landing();
+                }
         }
         
         
     }
 
     void HandleLanding() {
-        // remettre le vaisseau droit
-            
-        // lancer l'animation d'atterissage
+        if ((Quaternion.Angle(transform.rotation,initialRotation) > rotationTol) || (Vector3.Distance(transform.position,landingPosition) > positionTol)){
+            // remettre le vaisseau droit
+            transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.deltaTime * landingRotationSpeed);
+            MoveTowardsTarget(rb, landingPosition, landingSpeed);
+        }    
+        else {
+            transform.rotation = initialRotation;
+            transform.position = landingPosition;
+            //lancer l'animation d'atterissage
+            //A FAIRE
 
+            wantToLand = false;
+        }
+    
+
+        
+    }
+
+    void MoveTowardsTarget(Rigidbody rb, Vector3 targetPosition, float force)
+    {
+        Vector3 direction = (targetPosition - rb.position).normalized; // Direction vers la cible
+        rb.AddForce(direction * force, ForceMode.Force); // Applique une force continue
     }
 
     void landing() {
-        if (Input.GetKey(KeyCode.LeftShift) && canLand) {
+        if (Input.GetKey(KeyCode.L) && canLand) {
             wantToLand = true;
+            //on enlève les forces
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 
