@@ -23,8 +23,8 @@ public class SpaceshipController : MonoBehaviour
     Quaternion initialRotation = Quaternion.Euler(0, 0, 0);
     public Vector3 landingPosition = new Vector3(0,0,0);
     public float landingRotationSpeed = 2f;
-    public float landingSpeed = 10000f;
-    public float landingSpeed2 = 500f;
+    public float landingSpeed = 100000f;
+    public float landingSpeed2 = 1000f;
     public float launchingSpeed = 100f;
     public float rotationTol = 1f;
     public float positionTol = 0.2f;
@@ -44,6 +44,8 @@ public class SpaceshipController : MonoBehaviour
         rb.linearDamping = 0.5f; // Helps prevent excessive drifting
         rb.angularDamping = 0.5f; // Helps slow down rotation
         initialRotation = transform.rotation;
+
+        //init health
         healthBar.setMaxHealth(maxHealth);
         healthGameObject.SetActive(false);
         health = maxHealth;
@@ -55,13 +57,14 @@ public class SpaceshipController : MonoBehaviour
         bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
         // Active ou désactive le mode kinematic
         if (isPlayingLaunchingAnimation){
+            healthBar.setMaxHealth(maxHealth);
+            health = maxHealth;
             rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
         } else if ((isPlayingLandingAnimation) || (isLanding)) {
             isLanding = true;
             if (Vector3.Distance(transform.position, landingPosition) > positionTol) {
                 MoveTowardsTarget(rb, landingPosition, landingSpeed2);
-            }
-            if ((Vector3.Distance(transform.position, landingPosition) < positionTol) && !(isPlayingLandingAnimation)){
+            } else if (!(isPlayingLandingAnimation)){
                 transform.position = landingPosition;
                 transform.rotation = initialRotation;
                 rb.linearVelocity = Vector3.zero;
@@ -98,6 +101,7 @@ public class SpaceshipController : MonoBehaviour
             transform.position = preLandingPosition;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+
             //lancer l'animation d'atterissage
             animator.SetBool("isDriven", false);
             wantToLand = false;
