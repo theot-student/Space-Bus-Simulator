@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27508f9cd22c06b8c8807fdf9e8a0820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spaceship: {fileID: 1991901179}
   landingAera: {x: 0, y: 0, z: 0}
 --- !u!65 &2592104
 BoxCollider:
@@ -236,7 +237,7 @@ CharacterController:
   m_StepOffset: 0.00005
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &140528555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,8 +365,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: 9230a754a5a4c4849b17b8bcfdd3d133, type: 2}
     - target: {fileID: 5866666021909216657, guid: fdcc2ea0b4a59d44ebb86899c1f72c78, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: fdcc2ea0b4a59d44ebb86899c1f72c78, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1372,7 +1377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fa61aef7f969e94da85ef3b25dab8be1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fa61aef7f969e94da85ef3b25dab8be1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1428,7 +1433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7296261088380659680, guid: fa61aef7f969e94da85ef3b25dab8be1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0562
+      value: 0.33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -1818,7 +1823,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991901176}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 500
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1871,21 +1876,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf2b5dc745a2d14fbba7125969b777c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustForce: 50000
-  rotationForce: 0.5
+  thrustForce: 10000000
+  rotationForce: 120
   maxSpeed: 20
-  rotationSpeed: 0.03
+  rotationSpeed: 20
   animator: {fileID: 1991901178}
   player: {fileID: 140528550}
   canLaunch: 1
   canLand: 0
   landingPosition: {x: 0, y: 0, z: 0}
   landingRotationSpeed: 2
-  landingSpeed: 50
-  landingSpeed2: 1
-  launchingSpeed: 1
-  rotationTol: 2
-  positionTol: 1
+  landingSpeed: 10000
+  landingSpeed2: 500
+  launchingSpeed: 100
+  rotationTol: 0.3
+  positionTol: 0.5
 --- !u!136 &1991901181
 CapsuleCollider:
   m_ObjectHideFlags: 0

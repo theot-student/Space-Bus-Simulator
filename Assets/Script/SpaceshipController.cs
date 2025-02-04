@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
 {
-    public float thrustForce = 50000f; // Lower force for smoother acceleration
-    public float rotationForce = 0.5f; // Less sensitive rotation
+    public float thrustForce = 1e+7f; // Lower force for smoother acceleration
+    public float rotationForce = 120f; // Less sensitive rotation
     public float maxSpeed = 20f; // Limit spaceship speed
-    public float rotationSpeed = 0.03f;
+    public float rotationSpeed = 20f;
     private Rigidbody rb;  
     public Animator animator;
     public Player player;
@@ -16,11 +16,11 @@ public class SpaceshipController : MonoBehaviour
     Quaternion initialRotation = Quaternion.Euler(0, 0, 0);
     public Vector3 landingPosition = new Vector3(0,0,0);
     public float landingRotationSpeed = 2f;
-    public float landingSpeed = 10f;
-    public float landingSpeed2 = 0.00001f;
-    public float launchingSpeed = 1f;
-    public float rotationTol = 2f;
-    public float positionTol = 1f;
+    public float landingSpeed = 10000f;
+    public float landingSpeed2 = 500f;
+    public float launchingSpeed = 100f;
+    public float rotationTol = 1f;
+    public float positionTol = 0.2f;
     private bool isLanding = false;
     void Start()
     {
@@ -37,12 +37,11 @@ public class SpaceshipController : MonoBehaviour
         bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
         // Active ou désactive le mode kinematic
         if (isPlayingLaunchingAnimation){
-            Vector3 targetLaunching = transform.position + new Vector3(0,0.5f,0);
-            MoveTowardsTarget(rb, targetLaunching, Time.deltaTime * launchingSpeed);
+            rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
         } else if ((isPlayingLandingAnimation) || (isLanding)) {
             isLanding = true;
             if (Vector3.Distance(transform.position, landingPosition) > positionTol) {
-                MoveTowardsTarget(rb, landingPosition, Time.deltaTime * landingSpeed2);
+                MoveTowardsTarget(rb, landingPosition, landingSpeed2);
             }
             if ((Vector3.Distance(transform.position, landingPosition) < positionTol) && !(isPlayingLandingAnimation)){
                 transform.position = landingPosition;
@@ -69,7 +68,7 @@ public class SpaceshipController : MonoBehaviour
     }
 
     void HandleLanding() {
-        Vector3 preLandingPosition = landingPosition + new Vector3(0,0.2f,0);
+        Vector3 preLandingPosition = landingPosition + new Vector3(0,1f,0);
         if ((Quaternion.Angle(transform.rotation,initialRotation) > rotationTol) || (Vector3.Distance(transform.position,preLandingPosition) > positionTol)){
             // remettre le vaisseau droit
             transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.deltaTime * landingRotationSpeed);

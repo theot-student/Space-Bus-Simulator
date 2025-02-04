@@ -37,7 +37,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //controller.enabled = true;
+        
+        controller.enabled = true;
         textOnScreen.text = ""; 
     }
 
