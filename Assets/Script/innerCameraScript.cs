@@ -12,7 +12,7 @@ public class InnerCameraScript : MonoBehaviour
         {
             // Move the camera slightly above the head
             transform.position = head.position + head.up * heightOffset;
-            transform.rotation = head.rotation;
+            //transform.rotation = head.rotation;
         }
         else
         {

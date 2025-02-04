@@ -286,11 +286,12 @@ MonoBehaviour:
   innerCamera: {fileID: 391652924}
   spaceship: {fileID: 1991901179}
   textOnScreen: {fileID: 592825225}
+  isFirstPerson: 0
   driverSeat: {fileID: 1588808198}
   healthBar: {fileID: 458806798}
   moveSpeed: 15
+  moveSpeed: 0.8
   sprintMultiplier: 1.5
-  smoothTime: 0.1
   mouseSensitivity: 2
 --- !u!143 &140528554
 CharacterController:
@@ -314,9 +315,9 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 0
   m_StepOffset: 0.00005
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &140528555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerCamera: {fileID: 391652927}
   outerCamera: {fileID: 330585545}
-  player: {fileID: 140528547}
+  player: {fileID: 140528550}
 --- !u!54 &140528556
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ public class changeCamera : MonoBehaviour
 {
     public Camera innerCamera;
     public Camera outerCamera;
-    public GameObject player;
+    public Player player;
     void Start()
     {
         outerCamera.enabled=true;
@@ -18,10 +18,11 @@ public class changeCamera : MonoBehaviour
             if (outerCamera.enabled){
                 innerCamera.enabled=true;
                 outerCamera.enabled=false;	
+                player.isFirstPerson=true;
                 Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
                 foreach (Renderer rend in renderers)
                 {
-                    rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+                    rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;   
                 }
 
                 
@@ -30,6 +31,7 @@ public class changeCamera : MonoBehaviour
                 outerCamera.enabled=true;
                 innerCamera.enabled=false;
                 Renderer[] renderers = player.GetComponentsInChildren<Renderer>();
+                player.isFirstPerson=false;
                 foreach (Renderer rend in renderers)
                 {
                     rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;

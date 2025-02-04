@@ -9,10 +9,10 @@ public class Player : MonoBehaviour
 
     private CharacterController controller;
     private Animator animator; // Animator component
-    private Vector3 velocity;
-    private float speedVelocity;
+    private float speed;
     public TextMeshProUGUI textOnScreen;
     private bool withinReachToShip = false;
+    public bool isFirstPerson = false;
 
     public Transform driverSeat; // Assign the driver's seat Transform in the Inspector
 
@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.5f;
-    [SerializeField] private float smoothTime = 0.1f;
     [SerializeField] private float mouseSensitivity = 2f;
 
     private float rotationX = 0f;
@@ -47,6 +46,7 @@ void Update()
 {
     if (!isDriving)
     {
+        animator.enabled = !isFirstPerson;
         HandleMovement();
         HandleRotation();
         if (withinReachToShip && Input.GetKey(KeyCode.E))
@@ -74,26 +74,25 @@ void Update()
     {
         if (controller == null || !controller.enabled) return;
 
-        float moveX = Input.GetAxis("Horizontal");
+        //float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
-
-        Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
-
+        bool isWalking = moveZ != 0f; 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float targetSpeed = isRunning ? moveSpeed * sprintMultiplier : moveSpeed;
-        if(isRunning){
-            animator.SetBool("isRunning", true); 
+        speed = isWalking ? moveSpeed : 0;
+
+        if (isRunning){
+            speed = speed * sprintMultiplier;
+            animator.SetBool("isRunning", true);
         }
         else{
             animator.SetBool("isRunning", false); 
         }
-        float currentSpeed = Mathf.SmoothDamp(controller.velocity.magnitude, targetSpeed, ref speedVelocity, smoothTime);
 
         // Apply movement
-        controller.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
+        controller.Move(transform.forward * speed * Time.deltaTime);
 
-        float movementMagnitude = new Vector2(moveX, moveZ).magnitude;
-        animator.SetFloat("speed", movementMagnitude * currentSpeed); // Set speed for animations
+        //float movementMagnitude = new Vector2(moveX, moveZ).magnitude;
+        animator.SetFloat("speed", speed); // Set speed for animations
     }
 
     void HandleRotation()
@@ -107,7 +106,12 @@ void Update()
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        transform.Rotate(Vector3.up * mouseX);
+        if (isFirstPerson){
+            transform.Rotate(Vector3.up * mouseX);
+        }
+        else{
+            animator.SetFloat("rotation", mouseX);
+        }
 
         rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
