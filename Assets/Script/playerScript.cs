@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     public Transform driverSeat; // Assign the driver's seat Transform in the Inspector
 
+    public GameObject healthBar;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.5f;
@@ -53,6 +54,7 @@ void Update()
             isDriving = true;
             spaceshipAnimator.SetBool("isDriven", true);
             HideMessage();
+            healthBar.SetActive(true);
         }
     }
     else

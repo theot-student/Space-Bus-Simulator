@@ -3,14 +3,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
 {
+    //motion stuff
     public float thrustForce = 1e+7f; // Lower force for smoother acceleration
     public float rotationForce = 120f; // Less sensitive rotation
     public float maxSpeed = 20f; // Limit spaceship speed
     public float rotationSpeed = 20f;
+
+    //connected objects
     private Rigidbody rb;  
     public Animator animator;
     public Player player;
+
+    //launching
     public bool canLaunch = false;
+
+    //landing stuff
     public bool canLand = false;
     private bool wantToLand = false;
     Quaternion initialRotation = Quaternion.Euler(0, 0, 0);
@@ -22,6 +29,14 @@ public class SpaceshipController : MonoBehaviour
     public float rotationTol = 1f;
     public float positionTol = 0.2f;
     private bool isLanding = false;
+
+    //health
+    public HealthBarScript healthBar;
+    public GameObject healthGameObject;
+    public int maxHealth = 100;
+    public int health;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,6 +44,9 @@ public class SpaceshipController : MonoBehaviour
         rb.linearDamping = 0.5f; // Helps prevent excessive drifting
         rb.angularDamping = 0.5f; // Helps slow down rotation
         initialRotation = transform.rotation;
+        healthBar.setMaxHealth(maxHealth);
+        healthGameObject.SetActive(false);
+        health = maxHealth;
     }
 
     void Update()
@@ -51,6 +69,7 @@ public class SpaceshipController : MonoBehaviour
                 player.isDriving = false;
                 player.exitShip(transform.position);
                 isLanding = false;
+                healthGameObject.SetActive(false);
             } 
         } else {
             if (player.isDriving) {
@@ -136,4 +155,10 @@ public class SpaceshipController : MonoBehaviour
         // Apply torque for rotation
         rb.AddTorque(torque, ForceMode.Force);
     }
+
+    public void getHit(int healthLost){
+        health = health - healthLost;
+        healthBar.setHealth(health);
+    }
+
 }
