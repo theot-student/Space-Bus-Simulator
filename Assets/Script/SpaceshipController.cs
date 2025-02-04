@@ -37,7 +37,7 @@ public class SpaceshipController : MonoBehaviour
         bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
         // Active ou désactive le mode kinematic
         if (isPlayingLaunchingAnimation){
-            Vector3 targetLaunching = transform.position + new Vector3(0,0.001f,0);
+            Vector3 targetLaunching = transform.position + new Vector3(0,0.5f,0);
             MoveTowardsTarget(rb, targetLaunching, Time.deltaTime * launchingSpeed);
         } else if ((isPlayingLandingAnimation) || (isLanding)) {
             isLanding = true;
