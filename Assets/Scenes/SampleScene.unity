@@ -289,7 +289,7 @@ MonoBehaviour:
   isFirstPerson: 0
   driverSeat: {fileID: 1588808198}
   healthBar: {fileID: 458806798}
-  moveSpeed: 15
+  moveSpeed: 1
   sprintMultiplier: 1.5
   mouseSensitivity: 2
 --- !u!143 &140528554
@@ -631,7 +631,8 @@ MonoBehaviour:
   y: 1
   z: 0
   distanceBehind: 1
-  heightOffset: 0.55
+  heightOffset: 0.2
+  mouseSensitivity: 3
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,7 +903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3470b1e7f96d14dcfbeba922d15bfce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 140528547}
+  player: {fileID: 140528550}
   head: {fileID: 1053996891}
   heightOffset: 0.09
 --- !u!1 &410087039

@@ -74,25 +74,29 @@ void Update()
     {
         if (controller == null || !controller.enabled) return;
 
-        //float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
-        bool isWalking = moveZ != 0f; 
+        bool isWalking = moveZ > 0f; 
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         speed = isWalking ? moveSpeed : 0;
 
         if (isRunning){
             speed = speed * sprintMultiplier;
-            animator.SetBool("isRunning", true);
+            if (!isFirstPerson){
+                animator.SetBool("isRunning", true);
+            }
+            
         }
         else{
-            animator.SetBool("isRunning", false); 
+            if (!isFirstPerson){
+                animator.SetBool("isRunning", false);
+            }
         }
 
         // Apply movement
         controller.Move(transform.forward * speed * Time.deltaTime);
-
-        //float movementMagnitude = new Vector2(moveX, moveZ).magnitude;
-        animator.SetFloat("speed", speed); // Set speed for animations
+        if (!isFirstPerson){
+            animator.SetFloat("speed", speed); // Set speed for animations
+        }
     }
 
     void HandleRotation()
@@ -107,16 +111,22 @@ void Update()
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         if (isFirstPerson){
-            transform.Rotate(Vector3.up * mouseX);
+            transform.Rotate(transform.up * mouseX);
+            rotationX -= mouseY;
+            rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+            innerCamera.transform.localRotation = Quaternion.Euler(rotationX, transform.eulerAngles.y, 0f);
         }
         else{
-            animator.SetFloat("rotation", mouseX);
+            rotationX -= mouseY;
+            rotationX = Mathf.Clamp(rotationX, -30f, 45f); // Adjust these limits as desired.
+            innerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+            if (!isFirstPerson){
+                float turn = Input.GetAxis("Horizontal");
+                animator.SetFloat("rotation", turn);
+            }
+            
+
         }
-
-        rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
-
-        innerCamera.transform.localRotation = Quaternion.Euler(rotationX, transform.eulerAngles.y, 0f);
     }
     void HideMessage()
     {
