@@ -12,6 +12,7 @@ public class SpaceshipController : MonoBehaviour
     //connected objects
     private Rigidbody rb;  
     public Animator animator;
+    private Animator playerAnimator;
     public Player player;
 
     //launching
@@ -104,6 +105,7 @@ public class SpaceshipController : MonoBehaviour
 
             //lancer l'animation d'atterissage
             animator.SetBool("isDriven", false);
+            playerAnimator.SetBool("isSitting", false);
             wantToLand = false;
         }
     

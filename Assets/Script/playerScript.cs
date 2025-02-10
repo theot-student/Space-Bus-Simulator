@@ -55,6 +55,7 @@ void Update()
             spaceshipAnimator.SetBool("isDriven", true);
             HideMessage();
             healthBar.SetActive(true);
+            animator.SetBool("isSitting", true);
         }
     }
     else
@@ -64,7 +65,6 @@ void Update()
         transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
 
         // Disable movement components
-        animator.enabled = false;
         controller.enabled = false;
         
     }
