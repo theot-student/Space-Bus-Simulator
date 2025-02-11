@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 805893036398176210}
   - component: {fileID: 4974365169949269765}
   - component: {fileID: 4242858966327758521}
-  - component: {fileID: -6513384130694199933}
+  - component: {fileID: 2758067871043360730}
   m_Layer: 0
-  m_Name: beam
+  m_Name: ennemyBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 89137c2c109cf1b98b8b6f110fbcab87, type: 2}
+  - {fileID: 2100000, guid: 1d4306b5bea2334369cdc04a6e3704be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,7 +246,7 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &-6513384130694199933
+--- !u!114 &2758067871043360730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2173652159501602640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a97319035afa75128311c70553826db, type: 3}
+  m_Script: {fileID: 11500000, guid: b96936aa306cc268c8d75669bb490e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemy: {fileID: 0}
+  spaceship: {fileID: 0}

@@ -38,7 +38,7 @@ public class SpaceshipController : MonoBehaviour
     public float fireRate = 0.1f;
     private float nextFireTime;
     public float destroyFireTime = 5f;
-    public float fireForce = 10f;
+    public float fireForce = 100f;
 
     //health
     public HealthBarScript healthBar;
