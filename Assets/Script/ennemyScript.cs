@@ -28,26 +28,38 @@ public class ennemyScript : MonoBehaviour
     public float fireRate = 0.2f;
     private float nextFireTime;
 
+    //health
+    public HealthBarScript healthBar;
+    public GameObject healthGameObject;
+    public int maxHealth = 100;
+    public int health;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //init health
+        healthBar.setMaxHealth(maxHealth);
+        healthGameObject.SetActive(false);
+        health = maxHealth;
     }
 
 
     void Update()
-    {
-        if (isWalkingAround) {
-            WalkingAround();
-            Detection();
-        }   
-        if (isChasing){
-            ChaseSpaceship();
-            Detection();
-        }
-        if (isFiring)
-        {
-            Fire();
-            Detection();
+    {   
+        if (!PauseGameScript.gameIsPaused) {
+            if (isWalkingAround) {
+                WalkingAround();
+                Detection();
+            }   
+            if (isChasing){
+                ChaseSpaceship();
+                Detection();
+            }
+            if (isFiring)
+            {
+                Fire();
+                Detection();
+            }
         }
     }
 
@@ -56,23 +68,29 @@ public class ennemyScript : MonoBehaviour
             isWalkingAround = false;
             isChasing = false;
             isFiring = true;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 
         } else if (Vector3.Distance(transform.position,spaceship.transform.position) <= rangeDetection){
             isWalkingAround = false;
             isChasing = true;
             isFiring = false;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
         else {
             isWalkingAround = true;
             isChasing = false;
             isFiring = false;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 
     void MoveForward(Vector3 position){
         Vector3 dir = (position - transform.position).normalized;
         transform.LookAt(position);
-        rb.AddForce(dir * force * Time.deltaTime);
+        rb.AddForce(dir * force);
         if (rb.linearVelocity.magnitude > maxSpeed)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
@@ -84,10 +102,14 @@ public class ennemyScript : MonoBehaviour
         } else {
             MoveForward(start);
         }
-        if (Vector3.Distance(transform.position, start) < 0.5) {
+        if (Vector3.Distance(transform.position, start) < 0.2) {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             gotoEnd = true;
         }
-        if (Vector3.Distance(transform.position, end) < 0.5){
+        if (Vector3.Distance(transform.position, end) < 0.2){
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
             gotoEnd = false;
         }
     }
@@ -110,5 +132,11 @@ public class ennemyScript : MonoBehaviour
             Destroy(ennemyBeam, destroyFireTime);
         }
 
+    }
+
+    public void getHit(int healthLost){
+        health = health - healthLost;
+        healthBar.setHealth(health);
+        
     }
 }

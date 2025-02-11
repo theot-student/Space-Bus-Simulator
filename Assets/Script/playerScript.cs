@@ -44,29 +44,31 @@ public class Player : MonoBehaviour
 
 void Update()
 {
-    if (!isDriving)
-    {
-        animator.enabled = !isFirstPerson;
-        HandleMovement();
-        HandleRotation();
-        if (withinReachToShip && Input.GetKey(KeyCode.E))
+    if (!PauseGameScript.gameIsPaused) {
+        if (!isDriving)
         {
-            isDriving = true;
-            spaceshipAnimator.SetBool("isDriven", true);
-            HideMessage();
-            healthBar.SetActive(true);
-            animator.SetBool("isSitting", true);
+            animator.enabled = !isFirstPerson;
+            HandleMovement();
+            HandleRotation();
+            if (withinReachToShip && Input.GetKey(KeyCode.E))
+            {
+                isDriving = true;
+                spaceshipAnimator.SetBool("isDriven", true);
+                HideMessage();
+                healthBar.SetActive(true);
+                animator.SetBool("isSitting", true);
+            }
         }
-    }
-    else
-    {
-        // Move player to the driver's seat inside the spaceship
-        transform.position = driverSeat.transform.position;
-        transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
+        else
+        {
+            // Move player to the driver's seat inside the spaceship
+            transform.position = driverSeat.transform.position;
+            transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
 
-        // Disable movement components
-        controller.enabled = false;
-        
+            // Disable movement components
+            controller.enabled = false;
+            
+        }
     }
 }
 

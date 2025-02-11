@@ -6,10 +6,16 @@ public class beamScript : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {   
-        if (collision.transform.gameObject.name == ennemy.name){
-            //baisser vie ennemi
-        } 
-        Destroy(this);
+        ennemyScript es = collision.gameObject.GetComponent<ennemyScript>();
+        SpaceshipController spaceshipController = collision.gameObject.GetComponent<SpaceshipController>();
+        if (es != null)
+        {
+            es.getHit(10);
+        }
+        if (spaceshipController == null) {
+            Destroy(gameObject);
+        }
+        
     }
 
 }

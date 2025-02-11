@@ -14,6 +14,7 @@ public class changeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    if (!PauseGameScript.gameIsPaused) {
         if (Input.GetKeyDown("c")){
             if (outerCamera.enabled){
                 innerCamera.enabled=true;
@@ -39,6 +40,6 @@ public class changeCamera : MonoBehaviour
                 
             }
         }
-        
+    }
     }
 }

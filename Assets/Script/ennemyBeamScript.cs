@@ -4,13 +4,19 @@ public class ennemyBeamScript : MonoBehaviour
 {
     public SpaceshipController spaceship;
 
+
     void OnCollisionEnter (Collision collision)
     {   
-        if (collision.transform.gameObject.name == spaceship.name){
-            SpaceshipController spaceshipController = collision.gameObject.GetComponent<SpaceshipController>();
+        SpaceshipController spaceshipController = collision.gameObject.GetComponent<SpaceshipController>();
+        ennemyScript es = collision.gameObject.GetComponent<ennemyScript>();
+        if (spaceshipController != null)
+        {
             spaceshipController.getHit(10);
-        } 
-        Destroy(this);
+        }
+        if (es == null){
+            Destroy(gameObject);
+        }
+        
     }
 
 }

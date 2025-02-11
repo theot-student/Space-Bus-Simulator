@@ -63,9 +63,10 @@ public class SpaceshipController : MonoBehaviour
 
     void Update()
     {
+    if (!PauseGameScript.gameIsPaused) {    
         bool isPlayingLaunchingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door closing");
         bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
-        // Active ou désactive le mode kinematic
+        
         if (isPlayingLaunchingAnimation){
             healthBar.setMaxHealth(maxHealth);
             health = maxHealth;
@@ -96,8 +97,7 @@ public class SpaceshipController : MonoBehaviour
                 }
             }
         }
-        
-        
+    }
     }
 
     void HandleFire(){
