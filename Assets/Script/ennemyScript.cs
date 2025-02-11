@@ -12,6 +12,11 @@ public class ennemyScript : MonoBehaviour
     private bool isChasing = false;
     private bool isFiring = false;
 
+    //walking around
+    public Vector3 start;
+    public Vector3 end;
+    private bool gotoEnd = true;
+
     //motion
     public float force = 1000f;
     public float maxSpeed = 20f;
@@ -64,21 +69,31 @@ public class ennemyScript : MonoBehaviour
         }
     }
 
-    void WalkingAround(){
-
-    }
-
-    void ChaseSpaceship(){
-        Vector3 dir = (spaceship.transform.position - transform.position).normalized;
-
-        transform.LookAt(spaceship.transform.position);
-
+    void MoveForward(Vector3 position){
+        Vector3 dir = (position - transform.position).normalized;
+        transform.LookAt(position);
         rb.AddForce(dir * force * Time.deltaTime);
-
         if (rb.linearVelocity.magnitude > maxSpeed)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
         }
+    }
+    void WalkingAround(){
+        if (gotoEnd) {
+            MoveForward(end);
+        } else {
+            MoveForward(start);
+        }
+        if (Vector3.Distance(transform.position, start) < 0.5) {
+            gotoEnd = true;
+        }
+        if (Vector3.Distance(transform.position, end) < 0.5){
+            gotoEnd = false;
+        }
+    }
+
+    void ChaseSpaceship(){
+        MoveForward(spaceship.transform.position);
     }
 
     void Fire(){
