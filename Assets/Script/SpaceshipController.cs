@@ -31,6 +31,15 @@ public class SpaceshipController : MonoBehaviour
     public float positionTol = 0.2f;
     private bool isLanding = false;
 
+    //Fire
+    public GameObject beamPrefab;
+    public GameObject leftWeapon;
+    public GameObject rightWeapon;
+    public float fireRate = 0.1f;
+    private float nextFireTime;
+    public float destroyFireTime = 5f;
+    public float fireForce = 10f;
+
     //health
     public HealthBarScript healthBar;
     public GameObject healthGameObject;
@@ -83,12 +92,32 @@ public class SpaceshipController : MonoBehaviour
                     HandleMovement();
                     HandleRotation();
                     landing();
+                    HandleFire();
                 }
             }
         }
         
         
     }
+
+    void HandleFire(){
+        if (Input.GetMouseButtonDown(0)) {
+            if (nextFireTime < Time.time){
+                nextFireTime = fireRate + Time.time;
+
+                Vector3 dirBullet = leftWeapon.transform.forward;
+ 
+                GameObject beamLeft = Instantiate(beamPrefab, leftWeapon.transform.position , leftWeapon.transform.rotation * beamPrefab.transform.rotation);
+                GameObject beamRight = Instantiate(beamPrefab, rightWeapon.transform.position , rightWeapon.transform.rotation * beamPrefab.transform.rotation);
+
+                beamLeft.GetComponent<Rigidbody>().AddForce(dirBullet * fireForce);
+                Destroy(beamLeft, destroyFireTime);
+                beamRight.GetComponent<Rigidbody>().AddForce(dirBullet * fireForce);
+                Destroy(beamRight, destroyFireTime);
+            }
+        }
+    }
+
 
     void HandleLanding() {
         Vector3 preLandingPosition = landingPosition + new Vector3(0,1f,0);

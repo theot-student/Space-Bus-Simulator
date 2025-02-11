@@ -1576,6 +1576,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592825223}
   m_CullTransparentMesh: 1
+--- !u!1 &734677584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56645999a3662e82ab3a497248bed3c2, type: 3}
+  m_PrefabInstance: {fileID: 1368131649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &935223909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,7 +1668,7 @@ GameObject:
   - component: {fileID: 1038499547}
   - component: {fileID: 1038499546}
   m_Layer: 5
-  m_Name: Waypoint
+  m_Name: WaypointStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2677,10 +2682,16 @@ MonoBehaviour:
   landingPosition: {x: 0, y: 0, z: 0}
   landingRotationSpeed: 2
   landingSpeed: 100000
-  landingSpeed2: 1000
+  landingSpeed2: 100
   launchingSpeed: 100
   rotationTol: 0.3
   positionTol: 0.3
+  beamPrefab: {fileID: 2173652159501602640, guid: d35114865be4257049ef877e1e53481b, type: 3}
+  leftWeapon: {fileID: 734677584}
+  rightWeapon: {fileID: 2034454987}
+  fireRate: 0.2
+  destroyFireTime: 5
+  fireForce: 1000
   healthBar: {fileID: 458806801}
   healthGameObject: {fileID: 458806798}
   maxHealth: 100
@@ -2839,6 +2850,11 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991901176}
   m_Enabled: 1
+--- !u!1 &2034454987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56645999a3662e82ab3a497248bed3c2, type: 3}
+  m_PrefabInstance: {fileID: 33477619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
