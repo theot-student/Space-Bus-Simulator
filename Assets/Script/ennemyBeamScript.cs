@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ennemyBeamScript : MonoBehaviour
+public class EnnemyBeamScript : MonoBehaviour
 {
     public SpaceshipController spaceship;
 
@@ -8,7 +8,7 @@ public class ennemyBeamScript : MonoBehaviour
     void OnCollisionEnter (Collision collision)
     {   
         SpaceshipController spaceshipController = collision.gameObject.GetComponent<SpaceshipController>();
-        ennemyScript es = collision.gameObject.GetComponent<ennemyScript>();
+        EnnemyScript es = collision.gameObject.GetComponent<EnnemyScript>();
         if (spaceshipController != null)
         {
             spaceshipController.getHit(10);

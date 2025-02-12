@@ -4,13 +4,15 @@ using TMPro;
 public class EnnemyHealthBarMarker : MonoBehaviour
 {
     public GameObject healthGameObject;
+    public GameObject ennemy;
     public Image img;
     public Transform target;
     public Vector3 offset;
     public Camera camera;
+    
     void Update()
     {   
-        if (!camera.enabled) {
+        if ((!camera.enabled) || (!ennemy.GetComponent<EnnemyScript>().isDetected)) {
             healthGameObject.SetActive(false);
         }
         else {

@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class ennemyScript : MonoBehaviour
+public class EnnemyScript : MonoBehaviour
 {
     public GameObject spaceship;
     public SpaceshipController spaceshipController;
     private Rigidbody rb;  
 
+    public bool isDetected;
     public float rangeDetection;
     public float fireRangeDetection;
     private bool isWalkingAround = true;
@@ -127,7 +128,7 @@ public class ennemyScript : MonoBehaviour
             Vector3 dirBullet = transform.forward;
  
             GameObject ennemyBeam = Instantiate(ennemiBeamPrefab, transform.position , transform.rotation * ennemiBeamPrefab.transform.rotation);
-            ennemyBeam.GetComponent<ennemyBeamScript>().spaceship = spaceshipController;
+            ennemyBeam.GetComponent<EnnemyBeamScript>().spaceship = spaceshipController;
             ennemyBeam.GetComponent<Rigidbody>().AddForce(dirBullet * fireForce);
             Destroy(ennemyBeam, destroyFireTime);
         }

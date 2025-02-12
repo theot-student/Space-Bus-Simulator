@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class changeCamera : MonoBehaviour
+public class ChangeCamera : MonoBehaviour
 {
     public Camera innerCamera;
     public Camera outerCamera;

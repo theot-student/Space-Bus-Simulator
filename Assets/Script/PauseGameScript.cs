@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PauseGameScript : MonoBehaviour
 {
     public static bool gameIsPaused = false;
@@ -13,7 +13,7 @@ public class PauseGameScript : MonoBehaviour
         }
     }
 
-    void PauseGame ()
+    public void PauseGame ()
     {
         if(gameIsPaused)
         {
@@ -40,6 +40,11 @@ public class PauseGameScript : MonoBehaviour
     public void QuitGame (){
         Debug.Log("GoodBye");
         Application.Quit();
+    }
+
+    public void RestartGame () {
+        PauseGame();
+        SceneManager.LoadScene("SampleScene");
     }
 }
 

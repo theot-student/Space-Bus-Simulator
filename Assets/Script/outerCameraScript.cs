@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class outerCameraScript : MonoBehaviour
+public class OuterCameraScript : MonoBehaviour
 {
     public float elevation;
     public Player player;

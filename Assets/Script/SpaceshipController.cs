@@ -46,7 +46,11 @@ public class SpaceshipController : MonoBehaviour
     public int maxHealth = 100;
     public int health;
 
-
+    //Detection
+    private bool ennemyDetected = false;
+    public EnnemyScript[] classicEnnemyList;
+    public float rangeDetection;
+    public DialogueScript dialogueScript;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -95,7 +99,9 @@ public class SpaceshipController : MonoBehaviour
                     landing();
                     HandleFire();
                 }
+                Detection();
             }
+            
         }
     }
     }
@@ -196,4 +202,23 @@ public class SpaceshipController : MonoBehaviour
         healthBar.setHealth(health);
     }
 
+     void Detection(){
+        foreach (EnnemyScript ennemyScript in classicEnnemyList) {
+            if (Vector3.Distance(transform.position,ennemyScript.gameObject.transform.position) <= rangeDetection){
+                ennemyScript.isDetected = true;
+                if (!ennemyDetected){
+                    ennemyDetectedPrompt();
+                }
+            } else {
+                ennemyScript.isDetected = false;
+                ennemyDetected = false;
+            }
+        }
+
+    }
+
+    void ennemyDetectedPrompt(){
+        ennemyDetected = true;
+        dialogueScript.newDialogue(new string[] {"Mince, des ennemis ! Je ferais mieux de fuir ou de riposter !"});
+    }
 }
