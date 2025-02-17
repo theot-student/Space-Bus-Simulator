@@ -64,6 +64,21 @@ public class SpaceshipController : MonoBehaviour
     public float rangeDetection;
     public DialogueScript dialogueScript;
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false; // Disable gravity for space movement
+        rb.linearDamping = 0.5f; // Helps prevent excessive drifting
+        rb.angularDamping = 0.5f; // Helps slow down rotation
+        initialRotation = transform.rotation;
+
+        //init health
+        healthBar.setMaxHealth(maxHealth);
+        healthGameObject.SetActive(false);
+        health = maxHealth;
+    }
+
+
     void Update()
     {
     if (!PauseGameScript.gameIsPaused) {    

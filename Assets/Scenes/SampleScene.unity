@@ -5347,7 +5347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrustForce: 10000000
-  rotationForce: 120
+  rotationForce: 60
   maxSpeed: 20
   rotationSpeed: 20
   animator: {fileID: 1991901178}
