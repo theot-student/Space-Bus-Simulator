@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 73058a9e99e307d40b0807c767e01be8
+guid: be21f6634862ea54393697c4653dd6a9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,10 +90,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 184219
-  packageName: LOW POLY ASTRONAULTS
-  packageVersion: 1.0
-  assetPath: Assets/Markus Art/Character/Textures/Astronault_Blue_Tex.png
-  uploadId: 404320

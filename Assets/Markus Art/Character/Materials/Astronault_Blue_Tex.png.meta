@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 119b0e34d61cb9c4bbf7035cab5e7a8d
+guid: 4255c8a26560ee946a98f48b77b3102a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,10 +90,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 184219
-  packageName: LOW POLY ASTRONAULTS
-  packageVersion: 1.0
-  assetPath: Assets/Markus Art/Character/Textures/Astronault_Green_Tex.png
-  uploadId: 404320

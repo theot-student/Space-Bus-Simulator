@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 678db9927e3901543a96abcb725078a9
+guid: 01ab9abf0bdbee044acfa6c79e7f2148
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,10 +90,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 184219
-  packageName: LOW POLY ASTRONAULTS
-  packageVersion: 1.0
-  assetPath: Assets/Markus Art/Character/Textures/Astronault_Pink_Tex.png
-  uploadId: 404320

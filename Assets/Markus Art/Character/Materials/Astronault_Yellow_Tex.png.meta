@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8b81ea32f588cd4c9ddefeaead23d2a
+guid: 6f166d9d4ae51be418a2addf687d07df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,10 +90,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 184219
-  packageName: LOW POLY ASTRONAULTS
-  packageVersion: 1.0
-  assetPath: Assets/Markus Art/Character/Textures/Astronault_Red_Tex.png
-  uploadId: 404320

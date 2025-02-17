@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d28a858f32c1d2740b42770b48fee6d6
+guid: d39b97c010bc1404ba236ab21e197615
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,10 +90,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 184219
-  packageName: LOW POLY ASTRONAULTS
-  packageVersion: 1.0
-  assetPath: Assets/Markus Art/Character/Textures/Astronault_White_Tex.png
-  uploadId: 404320

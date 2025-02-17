@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf3db87b31b8c0d49afa7184fdbcc556
+guid: 6d0c451beabf53748bf1db5c2b539995
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -90,10 +90,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 184219
-  packageName: LOW POLY ASTRONAULTS
-  packageVersion: 1.0
-  assetPath: Assets/Markus Art/Character/Textures/Astronault_Yellow_Tex.png
-  uploadId: 404320
