@@ -1,27 +1,31 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
 {
-    //motion stuff
+   // ===================== MOTION =====================
+    [Header("Motion Settings")]
     public float thrustForce = 1e+7f; // Lower force for smoother acceleration
     public float rotationForce = 120f; // Less sensitive rotation
     public float maxSpeed = 20f; // Limit spaceship speed
     public float rotationSpeed = 20f;
 
-    //connected objects
+    // ===================== CONNECTED OBJECTS =====================
+    [Header("Connected Objects")]
     private Rigidbody rb;  
     public Animator animator;
     private Animator playerAnimator;
     public Player player;
 
-    //launching
+    // ===================== LAUNCHING & LANDING =====================
+    [Header("Launching & Landing")]
     public bool canLaunch = false;
-
-    //landing stuff
+    
+    [Space] // Adds a small gap in the Inspector
     public bool canLand = false;
     private bool wantToLand = false;
-    Quaternion initialRotation = Quaternion.Euler(0, 0, 0);
+    public Quaternion initialRotation = Quaternion.Euler(0, 0, 0);
     public Vector3 landingPosition = new Vector3(0,0,0);
     public float landingRotationSpeed = 2f;
     public float landingSpeed = 100000f;
@@ -31,7 +35,13 @@ public class SpaceshipController : MonoBehaviour
     public float positionTol = 0.2f;
     private bool isLanding = false;
 
-    //Fire
+    // ===================== PASSENGERS =====================
+    [Header("Passenger Management")]
+    public List<Seat> passengerSeats;
+    public List<PNJ> passengers;
+
+    // ===================== WEAPONS & FIRE =====================
+    [Header("Weapon System")]
     public GameObject beamPrefab;
     public GameObject leftWeapon;
     public GameObject rightWeapon;
@@ -40,30 +50,19 @@ public class SpaceshipController : MonoBehaviour
     public float destroyFireTime = 5f;
     public float fireForce = 100f;
 
-    //health
+    // ===================== HEALTH =====================
+    [Header("Health System")]
     public HealthBarScript healthBar;
     public GameObject healthGameObject;
     public int maxHealth = 100;
     public int health;
 
-    //Detection
+    // ===================== ENEMY DETECTION =====================
+    [Header("Detection & AI")]
     private bool ennemyDetected = false;
     public EnnemyScript[] classicEnnemyList;
     public float rangeDetection;
     public DialogueScript dialogueScript;
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false; // Disable gravity for space movement
-        rb.linearDamping = 0.5f; // Helps prevent excessive drifting
-        rb.angularDamping = 0.5f; // Helps slow down rotation
-        initialRotation = transform.rotation;
-
-        //init health
-        healthBar.setMaxHealth(maxHealth);
-        healthGameObject.SetActive(false);
-        health = maxHealth;
-    }
 
     void Update()
     {
