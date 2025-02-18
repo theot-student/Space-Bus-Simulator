@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
@@ -114,6 +115,7 @@ public class SpaceshipController : MonoBehaviour
                     HandleFire();
                 }
                 Detection();
+                CheckLife();
             }
             
         }
@@ -234,5 +236,11 @@ public class SpaceshipController : MonoBehaviour
     void ennemyDetectedPrompt(){
         ennemyDetected = true;
         dialogueScript.newDialogue(new string[] {"Mince, des ennemis ! Je ferais mieux de fuir ou de riposter !"});
+    }
+
+    void CheckLife() {
+        if (health <= 0) {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }
