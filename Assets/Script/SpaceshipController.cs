@@ -137,7 +137,7 @@ public class SpaceshipController : MonoBehaviour
             if (player.isDriving) {
                 if (wantToLand) {
                     HandleLanding();
-                } else {
+                } else if (!(player.isFirstPerson && player.cameraUnlocked)) {
                     HandleMovement();
                     HandleRotation();
                     landing();

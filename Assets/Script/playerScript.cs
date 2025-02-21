@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public Transform driverSeat; // Assign the driver's seat Transform in the Inspector
 
     public GameObject healthBar;
+    public bool cameraUnlocked = false;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.5f;
@@ -56,18 +57,23 @@ void Update()
                 spaceshipAnimator.SetBool("isDriven", true);
                 HideMessage();
                 healthBar.SetActive(true);
+                animator.SetFloat("speed",0f);
                 animator.SetBool("isSitting", true);
             }
         }
         else
         {
             // Move player to the driver's seat inside the spaceship
-            transform.position = driverSeat.transform.position;
+
             transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
+            transform.position = driverSeat.transform.position;
 
             // Disable movement components
             controller.enabled = false;
-            
+
+            if (Input.GetKey(KeyCode.L)){
+                cameraUnlocked = !cameraUnlocked;
+            }       
         }
     }
 }
@@ -105,7 +111,6 @@ void Update()
     {
         if (innerCamera == null)
         {
-            Debug.LogWarning("Inner Camera not assigned!");
             return;
         }
 
@@ -113,7 +118,7 @@ void Update()
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         if (isFirstPerson){
-            transform.Rotate(transform.up * mouseX);
+            transform.Rotate(this.transform.up * mouseX);
             rotationX -= mouseY;
             rotationX = Mathf.Clamp(rotationX, -90f, 90f);
             innerCamera.transform.localRotation = Quaternion.Euler(rotationX, transform.eulerAngles.y, 0f);

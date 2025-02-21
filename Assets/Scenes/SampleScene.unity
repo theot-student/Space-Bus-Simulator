@@ -680,6 +680,7 @@ MonoBehaviour:
   isFirstPerson: 0
   driverSeat: {fileID: 1588808198}
   healthBar: {fileID: 458806798}
+  cameraUnlocked: 0
   moveSpeed: 1
   sprintMultiplier: 1.5
   mouseSensitivity: 2
@@ -6056,6 +6057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnnemyExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 4302488200950381037, guid: d80080c6d68f438438eb4e067a5b1abf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6288475858522490075, guid: d80080c6d68f438438eb4e067a5b1abf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30.525051
@@ -6112,6 +6117,10 @@ PrefabInstance:
     - target: {fileID: 520618233187279062, guid: 2eb4cf3220e0a9c419496525fbc9bf04, type: 3}
       propertyPath: m_Name
       value: EnnemySpaceship
+      objectReference: {fileID: 0}
+    - target: {fileID: 520618233187279062, guid: 2eb4cf3220e0a9c419496525fbc9bf04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 896861923017521772, guid: 2eb4cf3220e0a9c419496525fbc9bf04, type: 3}
       propertyPath: m_LocalPosition.x
