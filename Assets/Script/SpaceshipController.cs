@@ -61,7 +61,7 @@ public class SpaceshipController : MonoBehaviour
     // ===================== ENEMY DETECTION =====================
     [Header("Detection & AI")]
     private bool ennemyDetected = false;
-    public EnnemyScript[] classicEnnemyList;
+    public List<EnnemyScript> classicEnnemyList;
     public float rangeDetection;
     public DialogueScript dialogueScript;
 
@@ -242,5 +242,9 @@ public class SpaceshipController : MonoBehaviour
         if (health <= 0) {
             SceneManager.LoadScene("GameOver");
         }
+    }
+
+    public void ClassicEnnemyDestroyed(EnnemyScript ennemyScript){
+        classicEnnemyList.Remove(ennemyScript);
     }
 }

@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class EnnemyScript : MonoBehaviour
 {
+    public GameObject prefab;
+    public EnnemyHealthBarMarker ennemyHealthBarMarker;
+    public EnnemyPrefabScript ennemyPrefabScript;
+
     public GameObject spaceship;
     public SpaceshipController spaceshipController;
     private Rigidbody rb;  
@@ -35,6 +39,10 @@ public class EnnemyScript : MonoBehaviour
     public int maxHealth = 100;
     public int health;
 
+    //explosion
+    public ParticleSystem explosionParticles;
+    public AudioSource explosionSound;
+    public ExplosionLightScript explosionLightScript;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -85,6 +93,9 @@ public class EnnemyScript : MonoBehaviour
             isFiring = false;
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+        }
+        if (health <=0){
+            Explode();
         }
     }
 
@@ -140,4 +151,20 @@ public class EnnemyScript : MonoBehaviour
         healthBar.setHealth(health);
         
     }
+
+
+    public void Explode()
+    {   
+        spaceshipController.ClassicEnnemyDestroyed(this);
+
+        ennemyHealthBarMarker.Desactive();
+        ennemyPrefabScript.enabled = false;
+        explosionParticles.Play();
+        explosionSound.Play();
+        Destroy(gameObject, explosionParticles.main.duration); // Détruit l'effet après son animation
+        explosionLightScript.Explosion();
+        Destroy(prefab, 2f);
+        Destroy(gameObject, 0.1f);
+    }
+
 }

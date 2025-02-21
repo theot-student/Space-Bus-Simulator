@@ -43,4 +43,9 @@ public class EnnemyHealthBarMarker : MonoBehaviour
             }
     }
     }
+
+    public void Desactive(){
+        healthGameObject.SetActive(false);
+        this.enabled = false;
+    }
 }
