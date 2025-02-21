@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnnemyScript : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject ennemyExplosion;
     public EnnemyHealthBarMarker ennemyHealthBarMarker;
     public EnnemyPrefabScript ennemyPrefabScript;
 
@@ -163,7 +163,7 @@ public class EnnemyScript : MonoBehaviour
         explosionSound.Play();
         Destroy(gameObject, explosionParticles.main.duration); // Détruit l'effet après son animation
         explosionLightScript.Explosion();
-        Destroy(prefab, 2f);
+        Destroy(ennemyExplosion, 2f);
         Destroy(gameObject, 0.1f);
     }
 

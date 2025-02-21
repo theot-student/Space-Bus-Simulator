@@ -92,6 +92,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41bd4bc33acdf48aea3ad54b0d0fb9a8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 761898759302864214}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41bd4bc33acdf48aea3ad54b0d0fb9a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -575865569404100429}
   m_SourcePrefab: {fileID: 100100000, guid: 41bd4bc33acdf48aea3ad54b0d0fb9a8, type: 3}
 --- !u!1 &520618233187279062 stripped
 GameObject:
@@ -110,13 +113,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400da7fa263857ad2b0b415b8baec24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  ennemyExplosion: {fileID: 0}
   ennemyHealthBarMarker: {fileID: 0}
   ennemyPrefabScript: {fileID: 0}
   spaceship: {fileID: 0}
   spaceshipController: {fileID: 0}
   isDetected: 0
-  rangeDetection: 30
+  rangeDetection: 50
   fireRangeDetection: 15
   start: {x: 30, y: 5, z: 0}
   end: {x: 40, y: 10, z: 5}
@@ -280,3 +283,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-575865569404100429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520618233187279062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d7568b3259c0a4f98180dbca4efc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthGameObject: {fileID: 0}
+  ennemy: {fileID: 0}
+  img: {fileID: 0}
+  target: {fileID: 0}
+  offset: {x: 0, y: 1, z: 0}
+  camera: {fileID: 0}
