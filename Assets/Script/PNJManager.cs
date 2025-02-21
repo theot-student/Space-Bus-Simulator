@@ -6,7 +6,7 @@ public class PNJManager : MonoBehaviour
     [Header("PNJ Settings")]
     public PNJScript pnjPrefab; // Prefab of the PNJ
     public Transform spawnPoint; // Where PNJs will spawn
-    public int numberOfPNJs = 5; // Number of PNJs to spawn
+    public int numberOfPNJs; // Number of PNJs to spawn
 
     [Header("Customization Options")]
     public Material[] skinMaterials; // Different skins/textures
@@ -18,6 +18,7 @@ public class PNJManager : MonoBehaviour
 
    void SpawnPNJs()
     {
+        numberOfPNJs = UnityEngine.Random.Range(1,10);
         for (int i = 0; i < numberOfPNJs; i++)
         {
             Debug.Log(i);

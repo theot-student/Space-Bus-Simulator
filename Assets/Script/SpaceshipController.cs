@@ -5,6 +5,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
 {
+    System.Random random = new System.Random(); // For randomness
+
    // ===================== MOTION =====================
     [Header("Motion Settings")]
     public float thrustForce = 1e+7f; // Lower force for smoother acceleration
@@ -40,7 +42,8 @@ public class SpaceshipController : MonoBehaviour
     // ===================== PASSENGERS =====================
     [Header("Passenger Management")]
     public List<Seat> passengerSeats;
-    public List<PNJ> passengers;
+    public List<PNJScript> passengers;
+    public HashSet<int> availableSeatsIndexes = new HashSet<int>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     // ===================== WEAPONS & FIRE =====================
     [Header("Weapon System")]
@@ -75,6 +78,17 @@ public class SpaceshipController : MonoBehaviour
     public Camera mainCamera;
     public Vector3 spawnOffset;
 
+    public void InitializePassengerList(int numberOfSeats)
+    {
+        passengers.Clear(); // Ensure it's empty first
+
+        // Add null values for each seat
+        for (int i = 0; i < numberOfSeats; i++)
+        {
+            passengers.Add(null);  // Null means no passenger initially
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -87,8 +101,11 @@ public class SpaceshipController : MonoBehaviour
         healthBar.setMaxHealth(maxHealth);
         healthGameObject.SetActive(false);
         health = maxHealth;
-
+        
+        InitializePassengerList(passengerSeats.Count);
     }
+
+    
 
 
     void Update()
@@ -296,6 +313,32 @@ public class SpaceshipController : MonoBehaviour
             ennemyPrefabScript.ennemySpaceship = ennemySpaceship;
 
             classicEnnemyList.Add(ennemyScript);
+        }
+    }
+
+    int GetAndRemoveRandomElement(HashSet<int> set)
+    {
+        List<int> tempList = new List<int>(set); // Convert HashSet to List
+        int randomIndex = random.Next(tempList.Count); // Get random index
+        int randomElement = tempList[randomIndex]; // Get the element
+        set.Remove(randomElement); // Remove it from the HashSet
+        return randomElement;
+    }
+
+    public void wantsToEmbark(PNJScript pnj){
+        if (availableSeatsIndexes.Count != 0){
+            int seatIndex = GetAndRemoveRandomElement(availableSeatsIndexes);
+            passengerSeats[seatIndex].pnj = pnj;
+            passengers[seatIndex] = pnj;
+
+            Animator pnjAnimator = pnj.GetComponent<Animator>();
+            pnjAnimator.SetBool("isSitting", true);
+            pnjAnimator.SetFloat("speed", 0f);
+            pnj.seat = passengerSeats[seatIndex];
+            pnj.controller.enabled = false;
+            pnj.navmesh.enabled = false;
+
+            pnj.isSitting = true;
         }
     }
 
