@@ -15,7 +15,7 @@ public class PNJManager : MonoBehaviour
 
     void Start()
     {
-        SpawnPNJs();
+        // SpawnP/NJs();
     }
 
     void SpawnPNJs()
