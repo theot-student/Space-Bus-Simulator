@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 public class PauseGameScript : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
+    public List<AudioClip> audioClips;
+    public AudioSource audio;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -45,6 +49,46 @@ public class PauseGameScript : MonoBehaviour
     public void RestartGame () {
         PauseGame();
         SceneManager.LoadScene("SampleScene");
+    }
+
+       public void PlayPauseMusic(){
+        if (audio.isPlaying){
+            audio.Stop();
+        } else {
+            audio.Play();
+        }
+    }
+
+    public void NextMusic(){
+        if (audio.isPlaying){
+            audio.Stop();
+            AudioClip currentClip = audio.clip;
+            int index = audioClips.IndexOf(currentClip);
+            AudioClip newClip;
+            if (index + 1 >= audioClips.Count) {
+                newClip = audioClips[0];
+            } else {
+                newClip = audioClips[index + 1];
+            }
+            audio.clip = newClip;
+            audio.Play();
+        }
+    }
+
+    public void PreviousMusic(){
+        if (audio.isPlaying){
+            audio.Stop();
+            AudioClip currentClip = audio.clip;
+            int index = audioClips.IndexOf(currentClip);
+            AudioClip newClip;
+            if (index <= 0) {
+                newClip = audioClips[audioClips.Count - 1];
+            } else {
+                newClip = audioClips[index - 1];
+            }
+            audio.clip = newClip;
+            audio.Play();
+        }
     }
 }
 

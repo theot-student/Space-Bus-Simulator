@@ -71,7 +71,7 @@ void Update()
             // Disable movement components
             controller.enabled = false;
 
-            if (Input.GetKey(KeyCode.L)){
+            if (Input.GetKeyDown(KeyCode.L)){
                 cameraUnlocked = !cameraUnlocked;
             }       
         }
@@ -163,9 +163,10 @@ void Update()
     }
 
     public void exitShip(Vector3 shipPosition){
+        isDriving = false;
         animator.enabled = true;
         controller.enabled = true;
 
-        transform.position = shipPosition + new Vector3(0,0,6);
+        transform.position = shipPosition + new Vector3(0,0,10);
     }
 }

@@ -10,9 +10,21 @@ public class SpaceshipController : MonoBehaviour
    // ===================== MOTION =====================
     [Header("Motion Settings")]
     public float thrustForce = 1e+7f; // Lower force for smoother acceleration
-    public float rotationForce = 120f; // Less sensitive rotation
+    public float rotationForce = 30; // Less sensitive rotation
     public float maxSpeed = 20f; // Limit spaceship speed
     public float rotationSpeed = 20f;
+    public float boostForce = 4;
+    
+    // ==================== PARTICLE EFFECTS =====================
+    [Header("Particles Objects")]
+    public Light boosterLight1;
+    public Light boosterLight2;
+    public float drivingLightIntensity;
+    public float staticLightIntensity;
+    public float boostLightIntensity;
+    public Color forwardColor;
+    public Color backwardColor;
+    public Color boostColor;
 
     // ===================== CONNECTED OBJECTS =====================
     [Header("Connected Objects")]
@@ -103,6 +115,10 @@ public class SpaceshipController : MonoBehaviour
         health = maxHealth;
         
         InitializePassengerList(passengerSeats.Count);
+
+        //init lights
+        boosterLight1.intensity = 0f;
+        boosterLight2.intensity = 0f;
     }
 
     
@@ -119,7 +135,9 @@ public class SpaceshipController : MonoBehaviour
             health = maxHealth;
             rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
             currentSpaceStation.currentlydockedSpaceship = null;
+            StaticBoosterEffects();
         } else if ((isPlayingLandingAnimation) || (isLanding)) {
+            StaticBoosterEffects();
             isLanding = true;
             if (Vector3.Distance(transform.position, landingPosition) > positionTol) {
                 MoveTowardsTarget(rb, landingPosition, landingSpeed2);
@@ -132,6 +150,8 @@ public class SpaceshipController : MonoBehaviour
                 player.exitShip(transform.position);
                 isLanding = false;
                 healthGameObject.SetActive(false);
+                boosterLight1.intensity = 0f;
+                boosterLight2.intensity = 0f;
             } 
         } else {
             if (player.isDriving) {
@@ -146,7 +166,6 @@ public class SpaceshipController : MonoBehaviour
                 Detection();
                 CheckLife();
             }
-            
         }
     }
     }
@@ -209,13 +228,30 @@ public class SpaceshipController : MonoBehaviour
 
     void HandleMovement()
     {
+        float realForce = thrustForce;
         Vector3 forceDirection = Vector3.zero;
+        bool isBoosting = Input.GetKey(KeyCode.LeftShift);
         // Adjusted for AZERTY keyboard (Z = W in Unity)
-        if (Input.GetKey(KeyCode.W)) forceDirection += transform.right; // Forward (Z on AZERTY)
-        if (Input.GetKey(KeyCode.S)) forceDirection -=transform.right;  // Backward
+        if (Input.GetKey(KeyCode.W)) { // Forward (Z on AZERTY)
+            if (!isBoosting) {
+                forceDirection += transform.right; 
+                BoosterEffects();
+            } else {
+                forceDirection += transform.right ; 
+                HugeBoostEffects();
+                realForce = realForce * boostForce;
+            }
+            
+        } else {
+            StaticBoosterEffects();
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            forceDirection -=transform.right;  // Backward
+            BackwardBoosterEffects();
+        }
         
         // Apply force gradually over time
-        rb.AddForce(forceDirection.normalized * thrustForce * Time.deltaTime);
+        rb.AddForce(forceDirection.normalized * realForce * Time.deltaTime);
 
         // Limit maximum speed to prevent excessive acceleration
         if (rb.linearVelocity.magnitude > maxSpeed)
@@ -342,4 +378,35 @@ public class SpaceshipController : MonoBehaviour
         }
     }
 
+    void BackwardBoosterEffects(){
+        float realLightIntensity = staticLightIntensity + Random.Range(-0.05f,0.05f);
+        boosterLight1.intensity = realLightIntensity;
+        boosterLight2.intensity = realLightIntensity;
+        boosterLight1.color = backwardColor;
+        boosterLight2.color = backwardColor;
+    }
+
+    void BoosterEffects(){
+        float realLightIntensity = drivingLightIntensity + Random.Range(-0.2f,0.2f);
+        boosterLight1.intensity = realLightIntensity;
+        boosterLight2.intensity = realLightIntensity;
+        boosterLight1.color = forwardColor;
+        boosterLight2.color = forwardColor;
+    }
+    
+    void StaticBoosterEffects(){
+        float realLightIntensity = staticLightIntensity + Random.Range(-0.05f,0.05f);
+        boosterLight1.intensity = realLightIntensity;
+        boosterLight2.intensity = realLightIntensity;
+        boosterLight1.color = forwardColor;
+        boosterLight2.color = forwardColor;
+    }
+
+    void HugeBoostEffects() {
+        float realLightIntensity = boostLightIntensity + Random.Range(-0.1f,0.1f);
+        boosterLight1.intensity = realLightIntensity;
+        boosterLight2.intensity = realLightIntensity;
+        boosterLight1.color = boostColor;
+        boosterLight2.color = boostColor;
+    }
 }
