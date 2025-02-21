@@ -1,42 +1,41 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System.Collections;
 public class PNJManager : MonoBehaviour
 {
     [Header("PNJ Settings")]
-    public GameObject pnjPrefab; // Prefab of the PNJ
+    public PNJScript pnjPrefab; // Prefab of the PNJ
     public Transform spawnPoint; // Where PNJs will spawn
     public int numberOfPNJs = 5; // Number of PNJs to spawn
 
     [Header("Customization Options")]
     public Material[] skinMaterials; // Different skins/textures
-    public Vector2 heightRange = new Vector2(0.08f, 0.12f); // Min and max height
-    public Vector2 corpulenceRange = new Vector2(0.08f, 0.13f); // Min and max body width
 
     void Start()
     {
-        // SpawnP/NJs();
+        SpawnPNJs();
     }
 
-    void SpawnPNJs()
+   void SpawnPNJs()
     {
         for (int i = 0; i < numberOfPNJs; i++)
         {
+            Debug.Log(i);
             // Spawn at random position near spawnPoint
-            GameObject newPNJ = Instantiate(pnjPrefab, spawnPoint.position, Quaternion.identity);
+            PNJScript newPNJ = Instantiate(pnjPrefab, spawnPoint.position, Quaternion.identity);
+            newPNJ.pnjManager = this;
+            newPNJ.spaceship = this.transform.parent.GetComponent<SpaceStationScript>().currentlydockedSpaceship;
             CustomizePNJ(newPNJ);
+
+            // Wait for half a second before spawning the next PNJ
+            // yield return new WaitForSeconds(0.5f);
         }
     }
 
-    void CustomizePNJ(GameObject pnj)
+    void CustomizePNJ(PNJScript pnj)
     {
         // Get the PNJ character model
         Transform model = pnj.transform.GetChild(0); // Assuming the model is the first child
-
-        // Randomize height and corpulence
-        float randomHeight = Random.Range(heightRange.x, heightRange.y);
-        float randomWidth = Random.Range(corpulenceRange.x, corpulenceRange.y);
-        model.localScale = new Vector3(randomWidth, randomHeight, randomWidth);
 
         // Randomize skin texture
         Renderer renderer = model.GetComponent<Renderer>();
@@ -45,11 +44,5 @@ public class PNJManager : MonoBehaviour
             renderer.material = skinMaterials[Random.Range(0, skinMaterials.Length)];
         }
 
-        // Apply random animation (optional)
-        Animator animator = pnj.GetComponent<Animator>();
-        if (animator != null)
-        {
-            animator.SetFloat("Speed", Random.Range(0.5f, 1.5f)); // Example: different movement speeds
-        }
     }
 }

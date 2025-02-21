@@ -18,7 +18,8 @@ public class SpaceshipController : MonoBehaviour
     public Animator animator;
     private Animator playerAnimator;
     public Player player;
-
+    public SpaceStationScript currentSpaceStation;
+    public SpaceStationScript possibleSpaceStation;
     // ===================== LAUNCHING & LANDING =====================
     [Header("Launching & Landing")]
     public bool canLaunch = false;
@@ -100,6 +101,7 @@ public class SpaceshipController : MonoBehaviour
             healthBar.setMaxHealth(maxHealth);
             health = maxHealth;
             rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
+            currentSpaceStation.currentlydockedSpaceship = null;
         } else if ((isPlayingLandingAnimation) || (isLanding)) {
             isLanding = true;
             if (Vector3.Distance(transform.position, landingPosition) > positionTol) {
@@ -169,9 +171,8 @@ public class SpaceshipController : MonoBehaviour
             playerAnimator.SetBool("isSitting", false);
             wantToLand = false;
         }
-    
-
-        
+        currentSpaceStation = possibleSpaceStation;
+        currentSpaceStation.currentlydockedSpaceship = this;
     }
 
     void MoveTowardsTarget(Rigidbody rb, Vector3 targetPosition, float force)

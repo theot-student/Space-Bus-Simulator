@@ -12,6 +12,7 @@ public class LandColliderScript : MonoBehaviour
             SpaceshipController spaceshipController = other.gameObject.GetComponent<SpaceshipController>();
             spaceshipController.canLand = true;
             spaceshipController.landingPosition = landingAera;
+            spaceshipController.possibleSpaceStation = this.transform.parent.GetComponent<SpaceStationScript>();
             ShowMessage("Appuyez sur 'L' pour aterrir");
         }
     }
