@@ -34,7 +34,9 @@ public class PauseGameScript : MonoBehaviour
             Time.timeScale = 1;
         }
     }
+
     public void ResumeGame () {
+        gameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pauseMenuUI.SetActive(false);

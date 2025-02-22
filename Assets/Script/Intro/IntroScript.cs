@@ -8,10 +8,11 @@ public class IntroScript : MonoBehaviour
     private bool startDialogue = false;
     // Update is called once per frame
     public TextMeshProUGUI textComponent;
-
+    public float vitesse;
     void Update()
     {
         bool isStatic = animator.GetCurrentAnimatorStateInfo(0).IsName("HumanoidIdle");
+        
         if (isStatic & !startDialogue) {
             dialogueScript.newDialogue(new string[] {"Bonjour prisonnier, ta peine viens d'être décidée par le capitaine.", 
             "Pour réparer tes erreurs, tu vas devoir travailler au compte du gouvernement galactique.", 
@@ -24,6 +25,13 @@ public class IntroScript : MonoBehaviour
         }
         if (!dialogueScript.gameObject.activeSelf & startDialogue){
             SceneManager.LoadScene("SampleScene");
+        }
+    }
+
+    void FixedUpdate(){
+        bool isStatic = animator.GetCurrentAnimatorStateInfo(0).IsName("HumanoidIdle");
+        if (!isStatic) {
+            transform.position += vitesse * transform.forward;
         }
     }
 }
