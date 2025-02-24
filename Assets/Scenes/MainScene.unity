@@ -1052,7 +1052,6 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
-  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1199,23 +1198,6 @@ MonoBehaviour:
   distanceBehind: 1
   heightOffset: 0.2
   mouseSensitivity: 3
---- !u!114 &330585549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aeb7b8a574ab804bad6f918273d6b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  img: {fileID: 1038499546}
-  target: {fileID: 565853076}
-  meterText: {fileID: 1118296647}
-  offset: {x: 0, y: 2, z: 0}
-  camera: {fileID: 330585545}
 --- !u!114 &333997610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,6 +2397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746861979}
   - component: {fileID: 746861980}
+  - component: {fileID: 746861981}
   m_Layer: 0
   m_Name: SpaceStations
   m_TagString: Untagged
@@ -2453,6 +2436,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spaceStations: []
   nbSpaceStations: 0
+--- !u!114 &746861981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746861978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aeb7b8a574ab804bad6f918273d6b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 1038499546}
+  target: {fileID: 565853076}
+  meterText: {fileID: 1118296647}
+  offset: {x: 0, y: 2, z: 0}
+  camera: {fileID: 330585545}
 --- !u!1 &761942227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4340,15 +4340,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2731471722551913178, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2609
+      value: -1175
       objectReference: {fileID: 0}
     - target: {fileID: 2731471722551913178, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -423.8
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 2731471722551913178, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 103.3
+      value: -797
       objectReference: {fileID: 0}
     - target: {fileID: 2731471722551913178, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4999,6 +4999,7 @@ MonoBehaviour:
   possibleSpaceStation: {fileID: 0}
   targetSpaceStation: {fileID: 0}
   spaceStationsScript: {fileID: 0}
+  waypointMarker: {fileID: 0}
   canLaunch: 1
   canLand: 0
   initialRotation: {x: 0, y: 0, z: 0, w: 1}

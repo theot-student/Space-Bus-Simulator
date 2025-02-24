@@ -36,6 +36,7 @@ public class SpaceshipController : MonoBehaviour
     public SpaceStationScript possibleSpaceStation;
     public SpaceStationScript targetSpaceStation;
     public SpaceStationsScript spaceStationsScript; 
+    public WaypointMarker waypointMarker;
     // ===================== LAUNCHING & LANDING =====================
     [Header("Launching & Landing")]
     public bool canLaunch = false;
@@ -476,5 +477,6 @@ public class SpaceshipController : MonoBehaviour
             spaceStationIndex = UnityEngine.Random.Range(0,spaceStationsScript.nbSpaceStations-1);
         } while(spaceStationsScript.spaceStations[spaceStationIndex]!=this.currentSpaceStation);
         targetSpaceStation = spaceStationsScript.spaceStations[spaceStationIndex];
+        waypointMarker.target = targetSpaceStation.transform;
     }
 }
