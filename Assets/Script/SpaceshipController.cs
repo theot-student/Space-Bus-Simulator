@@ -381,13 +381,13 @@ public class SpaceshipController : MonoBehaviour
 
     void RandomEvent(){
         float rand = Random.Range(1f,4f);
-        //if (rand < 2) {
-        //    FrontEnnemiesSpawn(4);
-        //} else if (rand >= 2 && rand < 3){
-        //    CaughtMiddleEnnemiesSpawn(6);
-        //} else if (rand >= 3 && rand <= 4){
+        if (rand < 2) {
+            FrontEnnemiesSpawn(4);
+        } else if (rand >= 2 && rand < 3){
+            CaughtMiddleEnnemiesSpawn(6);
+        } else if (rand >= 3 && rand <= 4){
             PNJEvent();
-        //}
+        }
     }
 
     void PNJEvent(){

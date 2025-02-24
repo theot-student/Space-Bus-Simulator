@@ -10,7 +10,7 @@ public class DialogueScript : MonoBehaviour
     public float textSpeed;
     public int index;
 
-    void Start()
+    void Awake()
     {
         textComponent.text = string.Empty;
         gameObject.SetActive(false);

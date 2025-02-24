@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueScript: {fileID: 1756797387}
+  panel: {fileID: 1756797385}
   audioSource: {fileID: 1679439162}
 --- !u!1 &1395523502
 GameObject:
@@ -328,8 +329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5552, y: 1.4306}
-  m_SizeDelta: {x: 401.1104, y: 75.1388}
+  m_AnchoredPosition: {x: 0.5552, y: -0.4899}
+  m_SizeDelta: {x: 401.1104, y: 94.3442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654625340
 MonoBehaviour:
@@ -385,7 +386,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -443,7 +444,6 @@ GameObject:
   - component: {fileID: 1679439157}
   - component: {fileID: 1679439156}
   - component: {fileID: 1679439162}
-  - component: {fileID: 1679439163}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -666,20 +666,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1679439163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679439155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc98280393b3ffb459337154e0b7cd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spaceShip: {fileID: 511164857}
-  dialogueScript: {fileID: 1756797387}
 --- !u!1 &1756797385
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,8 +702,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -104}
-  m_SizeDelta: {x: -341.5921, y: -243.0596}
+  m_AnchoredPosition: {x: 0, y: -89}
+  m_SizeDelta: {x: -341.5921, y: -196.9667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1756797387
 MonoBehaviour:
@@ -1002,6 +988,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1679439159}
   - {fileID: 1952465065}
-  - {fileID: 198698703}
   - {fileID: 2020458876}
+  - {fileID: 198698703}
   - {fileID: 1395523505}
