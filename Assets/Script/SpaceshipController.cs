@@ -34,6 +34,8 @@ public class SpaceshipController : MonoBehaviour
     public Player player;
     public SpaceStationScript currentSpaceStation;
     public SpaceStationScript possibleSpaceStation;
+    public SpaceStationScript targetSpaceStation;
+    public SpaceStationsScript spaceStationsScript; 
     // ===================== LAUNCHING & LANDING =====================
     [Header("Launching & Landing")]
     public bool canLaunch = false;
@@ -122,6 +124,7 @@ public class SpaceshipController : MonoBehaviour
         boosterLight2.intensity = 0f;
 
         playerAnimator = player.GetComponent<Animator>();
+        updateDestination();
     }
 
     
@@ -465,5 +468,13 @@ public class SpaceshipController : MonoBehaviour
         boosterLight2.intensity = realLightIntensity;
         boosterLight1.color = boostColor;
         boosterLight2.color = boostColor;
+    }
+
+    void updateDestination(){
+        int spaceStationIndex;
+        do {
+            spaceStationIndex = UnityEngine.Random.Range(0,spaceStationsScript.nbSpaceStations-1);
+        } while(spaceStationsScript.spaceStations[spaceStationIndex]!=this.currentSpaceStation);
+        targetSpaceStation = spaceStationsScript.spaceStations[spaceStationIndex];
     }
 }
