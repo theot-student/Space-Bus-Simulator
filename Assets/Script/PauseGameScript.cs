@@ -50,7 +50,7 @@ public class PauseGameScript : MonoBehaviour
 
     public void RestartGame () {
         PauseGame();
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainScene");
     }
 
        public void PlayPauseMusic(){

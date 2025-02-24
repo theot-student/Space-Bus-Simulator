@@ -119,6 +119,8 @@ public class SpaceshipController : MonoBehaviour
         //init lights
         boosterLight1.intensity = 0f;
         boosterLight2.intensity = 0f;
+
+        playerAnimator = player.GetComponent<Animator>();
     }
 
     
@@ -166,6 +168,7 @@ public class SpaceshipController : MonoBehaviour
                 Detection();
                 CheckLife();
             }
+            
         }
     }
     }
@@ -206,6 +209,8 @@ public class SpaceshipController : MonoBehaviour
             animator.SetBool("isDriven", false);
             playerAnimator.SetBool("isSitting", false);
             wantToLand = false;
+            GetComponent<Rigidbody>().isKinematic=true;
+
         }
         currentSpaceStation = possibleSpaceStation;
         currentSpaceStation.currentlydockedSpaceship = this;
@@ -283,17 +288,20 @@ public class SpaceshipController : MonoBehaviour
     }
 
      void Detection(){
-        foreach (EnnemyScript ennemyScript in classicEnnemyList) {
-            if (Vector3.Distance(transform.position,ennemyScript.gameObject.transform.position) <= rangeDetection){
-                ennemyScript.isDetected = true;
-                if (!ennemyDetected){
-                    ennemyDetectedPrompt();
+        if (classicEnnemyList.Count > 0){
+            foreach (EnnemyScript ennemyScript in classicEnnemyList) {
+                if (Vector3.Distance(transform.position,ennemyScript.gameObject.transform.position) <= rangeDetection){
+                    ennemyScript.isDetected = true;
+                    if (!ennemyDetected){
+                        ennemyDetectedPrompt();
+                    }
+                } else {
+                    ennemyScript.isDetected = false;
+                    ennemyDetected = false;
                 }
-            } else {
-                ennemyScript.isDetected = false;
-                ennemyDetected = false;
             }
         }
+
         //Ennemy Spawn
         if (Input.GetKeyDown(KeyCode.M)) EnnemiesSpawn(5);
     }

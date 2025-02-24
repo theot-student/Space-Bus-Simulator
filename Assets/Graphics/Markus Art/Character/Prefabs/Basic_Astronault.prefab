@@ -189,7 +189,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.5
+  m_Speed: 0.9
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -213,13 +213,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62f055060e2c1047bbb2c29da9a20c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   spaceship: {fileID: 0}
   pnjManager: {fileID: 0}
+  distanceToEmbark: 0.8
   isSitting: 0
   isAtTargetStation: 0
   agent: {fileID: -3372326912338558680}
   target: {x: 0, y: 0, z: 0}
   animator: {fileID: 8343308872696301590}
+  seat: {fileID: 0}
+  controller: {fileID: 0}
+  navmesh: {fileID: 0}
 --- !u!54 &8583675820888013559
 Rigidbody:
   m_ObjectHideFlags: 0

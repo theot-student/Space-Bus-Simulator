@@ -55,6 +55,7 @@ void Update()
             {
                 isDriving = true;
                 spaceshipAnimator.SetBool("isDriven", true);
+                spaceship.GetComponent<Rigidbody>().isKinematic = false;
                 HideMessage();
                 healthBar.SetActive(true);
                 animator.SetFloat("speed",0f);

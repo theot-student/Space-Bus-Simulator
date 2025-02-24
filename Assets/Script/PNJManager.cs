@@ -21,7 +21,6 @@ public class PNJManager : MonoBehaviour
         numberOfPNJs = UnityEngine.Random.Range(1,10);
         for (int i = 0; i < numberOfPNJs; i++)
         {
-            Debug.Log(i);
             // Spawn at random position near spawnPoint
             PNJScript newPNJ = Instantiate(pnjPrefab, spawnPoint.position, Quaternion.identity);
             newPNJ.pnjManager = this;
