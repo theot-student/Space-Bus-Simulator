@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 public class PNJManager : MonoBehaviour
 {
+    public SpaceshipController spaceship;
     [Header("PNJ Settings")]
     public PNJScript pnjPrefab; // Prefab of the PNJ
     public Transform spawnPoint; // Where PNJs will spawn

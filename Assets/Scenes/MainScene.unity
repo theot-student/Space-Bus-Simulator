@@ -1355,10 +1355,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1959840783}
   audioClips:
+  - {fileID: 8300000, guid: 86c175f6355b3ce4e8563b6ad4588fff, type: 3}
   - {fileID: 8300000, guid: c71ac9f4d76c0c74d8f9a96b2d31764c, type: 3}
   - {fileID: 8300000, guid: 0851608272ed2304a9968f26a02bda1f, type: 3}
   - {fileID: 8300000, guid: 5f30f7316be145642b12937ad6881639, type: 3}
-  - {fileID: 8300000, guid: 86c175f6355b3ce4e8563b6ad4588fff, type: 3}
   audio: {fileID: 1991901185}
 --- !u!198 &384567671 stripped
 ParticleSystem:
@@ -5002,7 +5002,7 @@ MonoBehaviour:
   targetSpaceStation: {fileID: 0}
   spaceStationsScript: {fileID: 0}
   waypointMarker: {fileID: 0}
-  canLaunch: 1
+  canLaunch: 0
   canLand: 0
   initialRotation: {x: 0, y: 0, z: 0, w: 1}
   landingPosition: {x: 0, y: 0, z: 0}
@@ -5024,6 +5024,8 @@ MonoBehaviour:
   - {fileID: 1477456831}
   - {fileID: 1991482684}
   passengers: []
+  nbOfPNJsInside: 0
+  nbOfPNJsRequired: 100
   beamPrefab: {fileID: 2173652159501602640, guid: d35114865be4257049ef877e1e53481b, type: 3}
   leftWeapon: {fileID: 734677584}
   rightWeapon: {fileID: 2034454987}

@@ -51,7 +51,7 @@ void Update()
             animator.enabled = !isFirstPerson;
             HandleMovement();
             HandleRotation();
-            if (withinReachToShip && Input.GetKey(KeyCode.E))
+            if (withinReachToShip && Input.GetKey(KeyCode.E) && spaceship.canLaunch)
             {
                 isDriving = true;
                 spaceshipAnimator.SetBool("isDriven", true);
@@ -149,9 +149,14 @@ void Update()
     void OnTriggerEnter(Collider other)
     {
         if (!isDriving && other.transform.gameObject.name == spaceship.name)
-        {
-            ShowMessage("Appuyez sur 'E' pour rentrer dans votre SpaceBus");
-            withinReachToShip = true;
+        {   
+            if (spaceship.nbOfPNJsInside == spaceship.nbOfPNJsRequired) {
+                ShowMessage("Appuyez sur 'E' pour rentrer dans votre SpaceBus");
+                withinReachToShip = true;
+            } else {
+                ShowMessage("Veuillez attendre que les passagers rentrent");
+            }
+            
         }
     }
 

@@ -59,6 +59,8 @@ public class SpaceshipController : MonoBehaviour
     public List<Seat> passengerSeats;
     public List<PNJScript> passengers;
     public HashSet<int> availableSeatsIndexes = new HashSet<int>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public int nbOfPNJsInside = 0;
+    public int nbOfPNJsRequired = 1000;
 
     // ===================== WEAPONS & FIRE =====================
     [Header("Weapon System")]
@@ -436,6 +438,12 @@ public class SpaceshipController : MonoBehaviour
             pnj.navmesh.enabled = false;
 
             pnj.isSitting = true;
+            nbOfPNJsInside++;
+            if (nbOfPNJsInside == nbOfPNJsRequired) {
+                canLaunch = true;
+            }
+        } else {
+            canLaunch = true;
         }
     }
 
