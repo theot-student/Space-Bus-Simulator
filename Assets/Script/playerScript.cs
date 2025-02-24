@@ -59,17 +59,17 @@ void Update()
                 spaceshipAnimator.SetBool("isDriven", true);
                 spaceship.GetComponent<Rigidbody>().isKinematic = false;
                 HideMessage();
+                
                 healthBar.SetActive(true);
-                waypointStart.SetActive(true);
+                waypointStart.SetActive(false);
                 animator.SetFloat("speed",0f);
+                animator.Play("Sitting", 0, 0f);
                 animator.SetBool("isSitting", true);
                 spaceship.handleLaunching();
             }
         }
         else
         {   
-            healthBar.SetActive(false);
-            waypointStart.SetActive(false);
             if (Input.GetKeyDown(KeyCode.U)){
                 if (!cameraUnlocked) {
                     transform.position = spaceship.transform.position + spaceship.transform.up * 0.06f;
@@ -82,11 +82,15 @@ void Update()
                 // Disable movement components
                 controller.enabled = false;
                 transform.position = driverSeat.transform.position;
+                healthBar.SetActive(true);
+                waypointStart.SetActive(true);
             } else {
                 // able movement components
                 HandleRotationInSpaceShip();
                 HandleMovementInSpaceShip();
                 spaceship.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                healthBar.SetActive(false);
+                waypointStart.SetActive(false);
             }
             // Move player to the driver's seat inside the spaceship
             
@@ -216,6 +220,7 @@ void Update()
         transform.position = spaceship.transform.position + new Vector3(-0.13f, 0, -0.4f);
         animator.enabled = true;
         controller.enabled = true;
+        animator.Play("HumanoidIdle", 0, 0f);
         animator.SetBool("isSitting", false);
     }
 }

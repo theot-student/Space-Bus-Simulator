@@ -7,7 +7,7 @@ public class LandColliderScript : MonoBehaviour
     public TextMeshProUGUI textOnScreen;
 
     void Start(){
-        landingAera = transform.position + new Vector3(0f,2.8f,0f);   
+        landingAera = transform.position + new Vector3(0f,2.6f,0f);   
     }
 
     // “other” refers to the collider on the GameObject inside this trigger

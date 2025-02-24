@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
+
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceshipController : MonoBehaviour
 {
@@ -60,7 +62,10 @@ public class SpaceshipController : MonoBehaviour
     public List<PNJScript> passengers;
     public HashSet<int> availableSeatsIndexes = new HashSet<int>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public int nbOfPNJsInside = 0;
-    public int nbOfPNJsRequired = 1000;
+    public int nbOfPNJsRequired;
+    public int nbOfpassengersToTransport = 50;
+    public TextMeshProUGUI passengerInfos;
+    public int transportedPassengers = 0;
 
     // ===================== WEAPONS & FIRE =====================
     [Header("Weapon System")]
@@ -145,53 +150,55 @@ public class SpaceshipController : MonoBehaviour
 
     void Update()
     {
-    if (!PauseGameScript.gameIsPaused) {    
-        bool isPlayingLaunchingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door closing");
-        bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
-        
-        if (isPlayingLaunchingAnimation){
-            rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
-        } else if ((isPlayingLandingAnimation) || (isLanding)) {
-            StaticBoosterEffects();
-            isLanding = true;
-            if (Vector3.Distance(transform.position, landingPosition) > positionTol) {
-                MoveTowardsTarget(rb, landingPosition, landingSpeed2);
-            } else if (!(isPlayingLandingAnimation)){
-                transform.position = landingPosition;
-                transform.rotation = initialRotation;
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                isLanding = false;
-                healthGameObject.SetActive(false);
-                boosterLight1.intensity = 0f;
-                boosterLight2.intensity = 0f;
-                GetComponent<Rigidbody>().isKinematic=true;
-                player.exitShip();
-                if (currentSpaceStation == targetSpaceStation){
-                    LandedAtTargetStation();
-                }
+        if (!PauseGameScript.gameIsPaused) {    
+            bool isPlayingLaunchingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door closing");
+            bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
+            
+            if (isPlayingLaunchingAnimation){
+                rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
+            } else if ((isPlayingLandingAnimation) || (isLanding)) {
+                StaticBoosterEffects();
+                isLanding = true;
+                if (Vector3.Distance(transform.position, landingPosition) > positionTol) {
+                    MoveTowardsTarget(rb, landingPosition, landingSpeed2);
+                } else if (!(isPlayingLandingAnimation)){
+                    transform.position = landingPosition;
+                    transform.rotation = initialRotation;
+                    rb.linearVelocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    isLanding = false;
+                    healthGameObject.SetActive(false);
+                    boosterLight1.intensity = 0f;
+                    boosterLight2.intensity = 0f;
+                    GetComponent<Rigidbody>().isKinematic=true;
+                    player.exitShip();
+                    if (currentSpaceStation == targetSpaceStation){
+                        LandedAtTargetStation();
+                    }
                 if (passengerToHelp != null) {
                     passengerToHelp.gameObject.GetComponent<AudioSource>().Stop();
                 }
                 pnjEventActive = false;
                 PNJMarker.SetActive(false);
-            } 
-        } else {
-            if (player.isDriving) {
-                if (wantToLand) {
-                    HandleLanding();
-                } else if (!(player.isFirstPerson && player.cameraUnlocked)) {
-                    HandleMovement();
-                    HandleRotation();
-                    landing();
-                    HandleFire();
+                } 
+            } else {
+                if (player.isDriving) {
+                    if (wantToLand) {
+                        HandleLanding();
+                    } else if (!(player.isFirstPerson && player.cameraUnlocked)) {
+                        HandleMovement();
+                        HandleRotation();
+                        landing();
+                        HandleFire();
+                    }
+                    Detection();
+                    CheckLife();
                 }
-                Detection();
-                CheckLife();
+                
             }
-            
         }
-    }
+        passengerInfos.text = "Passagers transportés : " + transportedPassengers + "/" + nbOfpassengersToTransport;
+        CheckWin();
     }
 
     void HandleFire(){
@@ -222,7 +229,7 @@ public class SpaceshipController : MonoBehaviour
 
 
     void HandleLanding() {
-        Vector3 preLandingPosition = landingPosition + new Vector3(0,1f,0);
+        Vector3 preLandingPosition = landingPosition + new Vector3(0,1.5f,0);
         if ((Quaternion.Angle(transform.rotation,initialRotation) > rotationTol) || (Vector3.Distance(transform.position,preLandingPosition) > positionTol)){
             // remettre le vaisseau droit
             transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, Time.deltaTime * landingRotationSpeed);
@@ -262,9 +269,10 @@ public class SpaceshipController : MonoBehaviour
 
                 pnj.seat = null;
                 pnj.GetComponent<Animator>().SetBool("isSitting", false);
+                pnj.GetComponent<Animator>().Play("HumanoidIdle", 0, 0f);
                 pnj.GetComponent<CharacterController>().enabled = true;
                 pnj.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
-                pnj.transform.position = this.transform.position + new Vector3(-0.13f, 0, 0.4f);
+                pnj.transform.position = this.transform.position + new Vector3(-0.13f, 0, -0.4f);
                 pnj.isSitting = false;
                 pnj.isAtTargetStation = true;
                 pnj.pnjManager = currentSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>();
@@ -410,6 +418,12 @@ public class SpaceshipController : MonoBehaviour
     void CheckLife() {
         if (health <= 0) {
             SceneManager.LoadScene("GameOver");
+        }
+    }
+
+    void CheckWin(){
+        if (transportedPassengers >= nbOfpassengersToTransport){
+            SceneManager.LoadScene("GameWon");
         }
     }
 

@@ -40,7 +40,8 @@ public class PNJScript : MonoBehaviour
             if (isAtTargetStation){
                 target = pnjManager.transform.position;
                 if (Vector3.Distance(target, this.transform.position)<=distanceToDebark){
-                    Destroy(gameObject, 0.1f);
+                    spaceship.transportedPassengers += 1;
+                    Destroy(gameObject, 0.00001f);
                 }
             }
             else{
