@@ -60,7 +60,7 @@ void Update()
                 spaceship.GetComponent<Rigidbody>().isKinematic = false;
                 HideMessage();
                 healthBar.SetActive(true);
-                waypointStart.SetActive(false);
+                waypointStart.SetActive(true);
                 animator.SetFloat("speed",0f);
                 animator.SetBool("isSitting", true);
                 spaceship.handleLaunching();

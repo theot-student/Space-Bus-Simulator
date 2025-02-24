@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|c:\\users\\tbala\\onedrive\\bureau\\space-bus-simulator\\assets\\script\\ennemyscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|c:\\users\\tbala\\onedrive\\bureau\\space-bus-simulator\\assets\\script\\spaceshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\spaceshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\assets\\script\\ennemyscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\ennemyscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\assets\\script\\ennemyhealthbarmarker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\ennemyhealthbarmarker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\assets\\script\\spaceshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\spaceshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,24 +26,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ennemyScript.cs",
               "DocumentMoniker": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\Assets\\Script\\ennemyScript.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\ennemyScript.cs",
               "ToolTip": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\Assets\\Script\\ennemyScript.cs",
               "RelativeToolTip": "Assets\\Script\\ennemyScript.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAIAzwF0AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAEwF0AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T14:59:43.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-21T14:59:43.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "EnnemyHealthBarMarker.cs",
               "DocumentMoniker": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\Assets\\Script\\EnnemyHealthBarMarker.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\EnnemyHealthBarMarker.cs",
@@ -55,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "EnnemyPrefabScript.cs",
               "DocumentMoniker": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\Assets\\Script\\EnnemyPrefabScript.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\EnnemyPrefabScript.cs",
@@ -67,15 +66,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "SpaceshipController.cs",
               "DocumentMoniker": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\Assets\\Script\\SpaceshipController.cs",
               "RelativeDocumentMoniker": "Assets\\Script\\SpaceshipController.cs",
               "ToolTip": "C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\Assets\\Script\\SpaceshipController.cs",
               "RelativeToolTip": "Assets\\Script\\SpaceshipController.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAASwEsAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAHYBAAAAAAAAAAD4v4MBAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-17T16:57:56.034Z"
+              "WhenOpened": "2025-02-17T16:57:56.034Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -96,6 +96,15 @@ public class SpaceshipController : MonoBehaviour
     public Vector3 usualSpawnOffset;
     public float spawnOffsetRange;
 
+    // ===================== EVENT =====================
+    [Header("Events")]
+    public float distanceEvent;
+    bool eventHappened;
+    public GameObject PNJMarker;
+    public WaypointMarker PNJMarkerScript;
+    private PNJScript passengerToHelp;
+    bool pnjEventActive = false;
+
     public void InitializePassengerList(int numberOfSeats)
     {
         passengers.Clear(); // Ensure it's empty first
@@ -161,7 +170,11 @@ public class SpaceshipController : MonoBehaviour
                 if (currentSpaceStation == targetSpaceStation){
                     LandedAtTargetStation();
                 }
-
+                if (passengerToHelp != null) {
+                    passengerToHelp.gameObject.GetComponent<AudioSource>().Stop();
+                }
+                pnjEventActive = false;
+                PNJMarker.SetActive(false);
             } 
         } else {
             if (player.isDriving) {
@@ -204,6 +217,7 @@ public class SpaceshipController : MonoBehaviour
         health = maxHealth;
         currentSpaceStation.currentlydockedSpaceship = null;
         StaticBoosterEffects();
+        eventHappened = false;
     }
 
 
@@ -349,6 +363,43 @@ public class SpaceshipController : MonoBehaviour
 
         //Ennemy Spawn
         if (Input.GetKeyDown(KeyCode.M)) DoomedEnnemiesSpawn(6);
+
+        //check Event
+        if (Vector3.Distance(transform.position, targetSpaceStation.transform.position) < distanceEvent && !eventHappened) {
+            eventHappened = true;
+            RandomEvent();
+        }
+    }
+
+    void RandomEvent(){
+        float rand = Random.Range(1f,4f);
+        //if (rand < 2) {
+        //    FrontEnnemiesSpawn(4);
+        //} else if (rand >= 2 && rand < 3){
+        //    CaughtMiddleEnnemiesSpawn(6);
+        //} else if (rand >= 3 && rand <= 4){
+            PNJEvent();
+        //}
+    }
+
+    void PNJEvent(){
+        int choice;
+        do {
+           choice  = Random.Range(0, passengers.Count);
+        } while (passengers[choice] == null);
+
+        PNJMarkerScript.offset = new Vector3(0,0.05f,0);
+        PNJMarkerScript.target = passengers[choice].gameObject.transform;
+        PNJMarker.SetActive(true);
+        passengerToHelp = passengers[choice];
+        dialogueScript.newDialogue(new string[] {"Un des passagers à besoin d'aide ! (appuyer sur C puis U pour la caméra interne)"});
+        pnjEventActive = true;
+        PNJCry();
+    }
+
+    void PNJCry(){
+        //passengerToHelp.gameObject.GetComponent<AudioSource>().loop = true;
+        passengerToHelp.gameObject.GetComponent<AudioSource>().Play();
     }
 
     void ennemyDetectedPrompt(){
