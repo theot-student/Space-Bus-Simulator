@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3372326912338558680, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_Speed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -343165652634315909, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 918211142537836404, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -145,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2677759292191298156, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1328.1
+      value: 1327.783
       objectReference: {fileID: 0}
     - target: {fileID: 2677759292191298156, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -153,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2677759292191298156, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 761.72
+      value: 761.725
       objectReference: {fileID: 0}
     - target: {fileID: 2677759292191298156, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -199,7 +207,18 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8583675820888013559, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583675820888013559, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -3372326912338558680, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+    - {fileID: 8583675820888013559, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+    - {fileID: -3303601385994371959, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -399,6 +418,18 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d7c41e5782d02d74eb84cf3dc8143e2f, type: 2}
+    - target: {fileID: -3372326912338558680, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3303601385994371959, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -343165652634315909, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 918211142537836404, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -467,6 +498,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 25426933b4777144a98bf7f0957a4935, type: 2}
+    - target: {fileID: 8583675820888013559, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -647,7 +682,7 @@ MonoBehaviour:
   animator: {fileID: 619225776}
   dialogueScript: {fileID: 1672978594}
   textComponent: {fileID: 576477609}
-  vitesse: 0.02
+  vitesse: 0.0005
 --- !u!81 &619225779
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1255,7 +1290,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30

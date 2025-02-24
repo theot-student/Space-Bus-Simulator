@@ -154,6 +154,8 @@ public class SpaceshipController : MonoBehaviour
                 healthGameObject.SetActive(false);
                 boosterLight1.intensity = 0f;
                 boosterLight2.intensity = 0f;
+                playerAnimator.SetBool("isSitting", false);
+                GetComponent<Rigidbody>().isKinematic=true;
             } 
         } else {
             if (player.isDriving) {
@@ -207,9 +209,7 @@ public class SpaceshipController : MonoBehaviour
 
             //lancer l'animation d'atterissage
             animator.SetBool("isDriven", false);
-            playerAnimator.SetBool("isSitting", false);
             wantToLand = false;
-            GetComponent<Rigidbody>().isKinematic=true;
 
         }
         currentSpaceStation = possibleSpaceStation;
