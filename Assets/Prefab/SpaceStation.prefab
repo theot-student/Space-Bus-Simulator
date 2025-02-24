@@ -591,7 +591,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.42, z: 1}
+  m_LocalScale: {x: 1, y: 1.43, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4371029815050487469}
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f07985da7d31df34588eed17d64d9d1e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6cae959a797c33f459d3586807dc1f78, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &3012683944319168962
 GameObject:
@@ -1106,7 +1106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d781d3940c6022498a0648bd38d04e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spaceship: {fileID: 0}
   pnjPrefab: {fileID: -343165652634315909, guid: ee2b05ebfe536fa44b955342a2b890b6, type: 3}
   spawnPoint: {fileID: 4164829102818346668}
   numberOfPNJs: 5

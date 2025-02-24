@@ -6,7 +6,8 @@ public class PNJScript : MonoBehaviour
     private static int PNJCounter = 0;
     public SpaceshipController spaceship;
     public PNJManager pnjManager;
-    public float distanceToEmbark = 0.8f;
+    private float distanceToEmbark = 0.8f;
+    private float distanceToDebark = 1.5f;
     public bool isSitting = false;
     public bool isAtTargetStation=false;
     public UnityEngine.AI.NavMeshAgent agent;
@@ -38,6 +39,9 @@ public class PNJScript : MonoBehaviour
         else{
             if (isAtTargetStation){
                 target = pnjManager.transform.position;
+                if (Vector3.Distance(target, this.transform.position)<=distanceToDebark){
+                    Destroy(gameObject, 0.1f);
+                }
             }
             else{
                 target = spaceship.transform.position + spaceShipOffset;

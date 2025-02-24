@@ -11,12 +11,7 @@ public class PNJManager : MonoBehaviour
     [Header("Customization Options")]
     public Material[] skinMaterials; // Different skins/textures
 
-    void Start()
-    {
-        SpawnPNJs();
-    }
-
-   void SpawnPNJs()
+   public void SpawnPNJs()
     {
         numberOfPNJs = UnityEngine.Random.Range(1,10);
         for (int i = 0; i < numberOfPNJs; i++)

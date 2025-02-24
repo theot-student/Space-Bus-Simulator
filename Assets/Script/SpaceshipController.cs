@@ -127,7 +127,7 @@ public class SpaceshipController : MonoBehaviour
         boosterLight2.intensity = 0f;
 
         playerAnimator = player.GetComponent<Animator>();
-
+        currentSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>().SpawnPNJs();
         nbOfPNJsRequired = currentSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>().numberOfPNJs;
     }
 
@@ -158,6 +158,9 @@ public class SpaceshipController : MonoBehaviour
                 boosterLight2.intensity = 0f;
                 GetComponent<Rigidbody>().isKinematic=true;
                 player.exitShip();
+                if (currentSpaceStation == targetSpaceStation){
+                    LandedAtTargetStation();
+                }
 
             } 
         } else {
@@ -220,10 +223,40 @@ public class SpaceshipController : MonoBehaviour
             //lancer l'animation d'atterissage
             animator.SetBool("isDriven", false);
             wantToLand = false;
-
         }
         currentSpaceStation = possibleSpaceStation;
         currentSpaceStation.currentlydockedSpaceship = this;
+    }
+    void LandedAtTargetStation(){
+        targetSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>().SpawnPNJs();
+        DismountPNJs();
+        updateDestination();
+        nbOfPNJsRequired = currentSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>().numberOfPNJs;
+        nbOfPNJsInside = 0;
+    }
+
+    void DismountPNJs(){
+        for (int seatIndex = 0; seatIndex < 10; seatIndex++){
+            if (!availableSeatsIndexes.Contains(seatIndex)){
+                Seat seat = passengerSeats[seatIndex];
+                PNJScript pnj = passengers[seatIndex];
+                print(pnj);
+                passengers[seatIndex] = null;
+
+                seat.pnj = null;
+                seat.pnjId = null;
+
+                pnj.seat = null;
+                pnj.GetComponent<Animator>().SetBool("isSitting", false);
+                pnj.GetComponent<CharacterController>().enabled = true;
+                pnj.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                pnj.transform.position = this.transform.position + new Vector3(-0.13f, 0, 0.4f);
+                pnj.isSitting = false;
+                pnj.isAtTargetStation = true;
+                pnj.pnjManager = currentSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>();
+            }
+        }
+        availableSeatsIndexes = new HashSet<int>(){ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     }
 
     void MoveTowardsTarget(Rigidbody rb, Vector3 targetPosition, float force)
