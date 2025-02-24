@@ -127,6 +127,8 @@ public class SpaceshipController : MonoBehaviour
         boosterLight2.intensity = 0f;
 
         playerAnimator = player.GetComponent<Animator>();
+
+        nbOfPNJsRequired = currentSpaceStation.gameObject.transform.GetChild(0).GetComponent<PNJManager>().numberOfPNJs;
     }
 
     
