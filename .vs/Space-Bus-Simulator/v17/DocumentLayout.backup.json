@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\ennemyscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|c:\\users\\tbala\\onedrive\\bureau\\space-bus-simulator\\assets\\script\\ennemyprefabscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|C:\\Users\\tbala\\OneDrive\\Bureau\\Space-Bus-Simulator\\assets\\script\\ennemyprefabscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D67A3FF-28DD-6CF4-FB06-83AB39C13961}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\ennemyprefabscript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -63,8 +63,7 @@
               "RelativeToolTip": "Assets\\Script\\EnnemyPrefabScript.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T12:54:57.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-21T12:54:57.764Z"
             },
             {
               "$type": "Document",

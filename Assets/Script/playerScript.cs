@@ -17,8 +17,10 @@ public class Player : MonoBehaviour
     public Transform driverSeat; // Assign the driver's seat Transform in the Inspector
 
     public GameObject healthBar;
-    public bool cameraUnlocked = false;
+    public GameObject waypointStart;
 
+    public bool cameraUnlocked = false;
+    public float maxRangeInSpaceship;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintMultiplier = 1.5f;
     [SerializeField] private float mouseSensitivity = 2f;
@@ -58,27 +60,60 @@ void Update()
                 spaceship.GetComponent<Rigidbody>().isKinematic = false;
                 HideMessage();
                 healthBar.SetActive(true);
+                waypointStart.SetActive(false);
                 animator.SetFloat("speed",0f);
                 animator.SetBool("isSitting", true);
                 spaceship.handleLaunching();
             }
         }
         else
-        {
-            // Move player to the driver's seat inside the spaceship
-
-            transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
-            transform.position = driverSeat.transform.position;
-
-            // Disable movement components
-            controller.enabled = false;
-
-            if (Input.GetKeyDown(KeyCode.L)){
+        {   
+            healthBar.SetActive(false);
+            waypointStart.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.U)){
+                if (!cameraUnlocked) {
+                    transform.position = spaceship.transform.position + spaceship.transform.up * 0.06f;
+                }
                 cameraUnlocked = !cameraUnlocked;
-            }       
+            }     
+            if (!cameraUnlocked) {
+                spaceship.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                transform.rotation = driverSeat.transform.rotation; // Align player with spaceship
+                // Disable movement components
+                controller.enabled = false;
+                transform.position = driverSeat.transform.position;
+            } else {
+                // able movement components
+                HandleRotationInSpaceShip();
+                HandleMovementInSpaceShip();
+                spaceship.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            }
+            // Move player to the driver's seat inside the spaceship
+            
         }
     }
 }
+
+    void HandleMovementInSpaceShip()
+    {
+        if (Input.GetKey(KeyCode.W)){
+            if (Vector3.Distance(transform.position, spaceship.transform.position) < maxRangeInSpaceship) {
+                transform.position = transform.position + 0.005f * spaceship.transform.right;
+                if (Vector3.Distance(transform.position, spaceship.transform.position) >= maxRangeInSpaceship) {
+                    transform.position = transform.position - 0.005f * spaceship.transform.right;
+                }
+            }
+        }
+        if (Input.GetKey(KeyCode.S)){
+            if (Vector3.Distance(transform.position, spaceship.transform.position) < maxRangeInSpaceship) {
+                transform.position = transform.position - 0.005f * spaceship.transform.right;
+                if (Vector3.Distance(transform.position, spaceship.transform.position) >= maxRangeInSpaceship) {
+                    transform.position = transform.position + 0.005f * spaceship.transform.right;
+                }
+            }
+        }
+        
+    }
 
     void HandleMovement()
     {
@@ -133,10 +168,15 @@ void Update()
                 float turn = Input.GetAxis("Horizontal");
                 animator.SetFloat("rotation", turn);
             }
-            
-
         }
     }
+
+    void HandleRotationInSpaceShip(){
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        transform.RotateAround(transform.position, this.transform.up, mouseX);
+    }
+
     void HideMessage()
     {
         textOnScreen.text = "";
