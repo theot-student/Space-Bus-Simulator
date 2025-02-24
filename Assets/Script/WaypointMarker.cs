@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class NewMonoBehaviourScript : MonoBehaviour
+public class WaypointMarker : MonoBehaviour
 {
     public Image img;
     public Transform target;
@@ -17,9 +17,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
             float minY = img.GetPixelAdjustedRect().height / 2;
             float maxY = Screen.height - minX;
 
-            Vector2 pos = Camera.main.WorldToScreenPoint(target.position + offset);
+            Vector2 pos = camera.WorldToScreenPoint(target.position + offset);
             
-            if (Vector3.Dot((target.position - transform.position), transform.forward) < 0){
+            if (Vector3.Dot((target.position - camera.transform.position), camera.transform.forward) < 0){
                 if (pos.x < Screen.width / 2){
                     pos.x = maxX;
                 } else {
@@ -31,7 +31,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
             img.transform.position = pos;
-            meterText.text = ((int) Vector3.Distance(target.position, transform.position) + "m");
+            meterText.text = ((int) Vector3.Distance(target.position, camera.transform.position) + "m");
     }
     }
 }
