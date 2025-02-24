@@ -60,6 +60,7 @@ void Update()
                 healthBar.SetActive(true);
                 animator.SetFloat("speed",0f);
                 animator.SetBool("isSitting", true);
+                spaceship.handleLaunching();
             }
         }
         else
@@ -168,11 +169,13 @@ void Update()
         }
     }
 
-    public void exitShip(Vector3 shipPosition){
+    public void exitShip(){
         isDriving = false;
+        
+
+        transform.position = spaceship.transform.position + new Vector3(-0.13f, 0, -0.4f);
         animator.enabled = true;
         controller.enabled = true;
-
-        transform.position = shipPosition + new Vector3(0,0,10);
+        animator.SetBool("isSitting", false);
     }
 }

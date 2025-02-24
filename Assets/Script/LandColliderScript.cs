@@ -3,8 +3,12 @@ using TMPro;
 public class LandColliderScript : MonoBehaviour
 {
     public SpaceshipController spaceship;
-    public Vector3 landingAera = new Vector3(0,0.2f,0);
+    public Vector3 landingAera;
     public TextMeshProUGUI textOnScreen;
+
+    void Start(){
+        landingAera = transform.position + new Vector3(0f,2.8f,0f);   
+    }
 
     // “other” refers to the collider on the GameObject inside this trigger
     void OnTriggerEnter (Collider other)
@@ -13,7 +17,7 @@ public class LandColliderScript : MonoBehaviour
             spaceshipController.canLand = true;
             spaceshipController.landingPosition = landingAera;
             spaceshipController.possibleSpaceStation = this.transform.parent.GetComponent<SpaceStationScript>();
-            ShowMessage("Appuyez sur 'L' pour aterrir");
+            ShowMessage("Appuyez sur 'L' pour atterrir");
         }
     }
 

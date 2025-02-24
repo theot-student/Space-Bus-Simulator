@@ -127,7 +127,6 @@ public class SpaceshipController : MonoBehaviour
         boosterLight2.intensity = 0f;
 
         playerAnimator = player.GetComponent<Animator>();
-        updateDestination();
     }
 
     
@@ -140,11 +139,7 @@ public class SpaceshipController : MonoBehaviour
         bool isPlayingLandingAnimation = animator.GetCurrentAnimatorStateInfo(0).IsName("Door opening");
         
         if (isPlayingLaunchingAnimation){
-            healthBar.setMaxHealth(maxHealth);
-            health = maxHealth;
             rb.AddForce(new Vector3(0,1,0) * launchingSpeed, ForceMode.Force);
-            currentSpaceStation.currentlydockedSpaceship = null;
-            StaticBoosterEffects();
         } else if ((isPlayingLandingAnimation) || (isLanding)) {
             StaticBoosterEffects();
             isLanding = true;
@@ -155,14 +150,13 @@ public class SpaceshipController : MonoBehaviour
                 transform.rotation = initialRotation;
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
-                player.isDriving = false;
-                player.exitShip(transform.position);
                 isLanding = false;
                 healthGameObject.SetActive(false);
                 boosterLight1.intensity = 0f;
                 boosterLight2.intensity = 0f;
-                playerAnimator.SetBool("isSitting", false);
                 GetComponent<Rigidbody>().isKinematic=true;
+                player.exitShip();
+
             } 
         } else {
             if (player.isDriving) {
@@ -198,6 +192,13 @@ public class SpaceshipController : MonoBehaviour
                 Destroy(beamRight, destroyFireTime);
             }
         }
+    }
+    public void handleLaunching(){
+        updateDestination();
+        healthBar.setMaxHealth(maxHealth);
+        health = maxHealth;
+        currentSpaceStation.currentlydockedSpaceship = null;
+        StaticBoosterEffects();
     }
 
 
@@ -482,8 +483,8 @@ public class SpaceshipController : MonoBehaviour
     void updateDestination(){
         int spaceStationIndex;
         do {
-            spaceStationIndex = UnityEngine.Random.Range(0,spaceStationsScript.nbSpaceStations-1);
-        } while(spaceStationsScript.spaceStations[spaceStationIndex]!=this.currentSpaceStation);
+            spaceStationIndex = UnityEngine.Random.Range(0,spaceStationsScript.nbSpaceStations);
+        } while(spaceStationsScript.spaceStations[spaceStationIndex]==this.currentSpaceStation);
         targetSpaceStation = spaceStationsScript.spaceStations[spaceStationIndex];
         waypointMarker.target = targetSpaceStation.transform;
     }

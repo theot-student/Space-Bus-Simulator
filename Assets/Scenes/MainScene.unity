@@ -4392,6 +4392,22 @@ PrefabInstance:
       propertyPath: currentlydockedSpaceship
       value: 
       objectReference: {fileID: 1991901179}
+    - target: {fileID: 8354895690771382487, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
+      propertyPath: spaceship
+      value: 
+      objectReference: {fileID: 1991901179}
+    - target: {fileID: 8354895690771382487, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
+      propertyPath: landingAera.x
+      value: 0.3595605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354895690771382487, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
+      propertyPath: landingAera.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354895690771382487, guid: 108be5e8897f8224d8eedc6a892fe5ad, type: 3}
+      propertyPath: landingAera.z
+      value: 1.459121
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5000,8 +5016,8 @@ MonoBehaviour:
   currentSpaceStation: {fileID: 776784723}
   possibleSpaceStation: {fileID: 0}
   targetSpaceStation: {fileID: 0}
-  spaceStationsScript: {fileID: 0}
-  waypointMarker: {fileID: 0}
+  spaceStationsScript: {fileID: 746861980}
+  waypointMarker: {fileID: 746861981}
   canLaunch: 0
   canLand: 0
   initialRotation: {x: 0, y: 0, z: 0, w: 1}
