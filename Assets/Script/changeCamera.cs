@@ -5,6 +5,7 @@ public class ChangeCamera : MonoBehaviour
     public Camera innerCamera;
     public Camera outerCamera;
     public Player player;
+    public GameObject healthGameObject;
     void Start()
     {
         outerCamera.enabled=true;
@@ -25,7 +26,7 @@ public class ChangeCamera : MonoBehaviour
                 {
                     rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;   
                 }
-
+                healthGameObject.SetActive(true);
                 
         }
             else {
@@ -37,7 +38,7 @@ public class ChangeCamera : MonoBehaviour
                 {
                     rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
                 }
-                
+                healthGameObject.SetActive(false);
             }
         }
     }

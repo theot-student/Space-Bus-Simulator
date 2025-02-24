@@ -88,7 +88,8 @@ public class SpaceshipController : MonoBehaviour
     public GameObject ennemyHealthBarPrefab;
     public Transform canvasTransform;
     public Camera mainCamera;
-    public Vector3 spawnOffset;
+    public Vector3 usualSpawnOffset;
+    public float spawnOffsetRange;
 
     public void InitializePassengerList(int numberOfSeats)
     {
@@ -289,21 +290,23 @@ public class SpaceshipController : MonoBehaviour
 
      void Detection(){
         if (classicEnnemyList.Count > 0){
+            bool currentEnnemyDetection = false;
             foreach (EnnemyScript ennemyScript in classicEnnemyList) {
                 if (Vector3.Distance(transform.position,ennemyScript.gameObject.transform.position) <= rangeDetection){
                     ennemyScript.isDetected = true;
+                    currentEnnemyDetection = true;
                     if (!ennemyDetected){
                         ennemyDetectedPrompt();
                     }
                 } else {
                     ennemyScript.isDetected = false;
-                    ennemyDetected = false;
                 }
             }
+            ennemyDetected = currentEnnemyDetection;
         }
 
         //Ennemy Spawn
-        if (Input.GetKeyDown(KeyCode.M)) EnnemiesSpawn(5);
+        if (Input.GetKeyDown(KeyCode.M)) DoomedEnnemiesSpawn(6);
     }
 
     void ennemyDetectedPrompt(){
@@ -323,41 +326,87 @@ public class SpaceshipController : MonoBehaviour
 
 
 
-    public void EnnemiesSpawn(int numberOfEnnemies){
+    public void usualEnnemiesSpawn(int numberOfEnnemies){
         for (int i = 0; i < numberOfEnnemies;i++){
-            GameObject ennemySpaceship = Instantiate(ennemySpaceshipPrefab, transform.position + spawnOffset, transform.rotation);
-            GameObject ennemyExplosion = Instantiate(ennemyExplosionPrefab, transform.position + spawnOffset, transform.rotation);
-            GameObject ennemyHealthBar = Instantiate(ennemyHealthBarPrefab, canvasTransform);
-
-            EnnemyScript ennemyScript = ennemySpaceship.GetComponent<EnnemyScript>();
-            EnnemyPrefabScript ennemyPrefabScript = ennemyExplosion.GetComponent<EnnemyPrefabScript>();
-            EnnemyHealthBarMarker ennemyHealthBarMarker = ennemySpaceship.GetComponent<EnnemyHealthBarMarker>();
-            GameObject explosionLight = ennemyExplosion.transform.GetChild(0).gameObject;
-            GameObject explosionParticles = ennemyExplosion.transform.GetChild(1).gameObject;
-
-            //add attributes of new spaceship
-            ennemyScript.ennemyExplosion = ennemyExplosion;
-            //ennemy health bar marker
-            ennemyHealthBarMarker.healthGameObject = ennemyHealthBar;
-            ennemyHealthBarMarker.img = ennemyHealthBar.GetComponent<Image>();
-            ennemyHealthBarMarker.ennemy = ennemySpaceship;
-            ennemyHealthBarMarker.target = ennemySpaceship.transform;
-            ennemyHealthBarMarker.camera = mainCamera;
-
-            ennemyScript.healthBar = ennemyHealthBar.GetComponent<HealthBarScript>();
-            ennemyScript.healthGameObject = ennemyHealthBar;
-            ennemyScript.ennemyHealthBarMarker = ennemyHealthBarMarker;
-
-            ennemyScript.ennemyPrefabScript = ennemyPrefabScript;
-            ennemyScript.spaceship = gameObject;
-            ennemyScript.spaceshipController = this;
-            ennemyScript.explosionParticles = explosionParticles.GetComponent<ParticleSystem>(); 
-            ennemyScript.explosionLightScript = explosionLight.GetComponent<ExplosionLightScript>();
-
-            ennemyPrefabScript.ennemySpaceship = ennemySpaceship;
-
-            classicEnnemyList.Add(ennemyScript);
+            EnnemySpawn(usualSpawnOffset);
         }
+    }
+
+    public void FrontEnnemiesSpawn(int numberOfEnnemies){
+        Vector3 frontOffset = transform.right * spawnOffsetRange;
+        for (int i = 0; i < numberOfEnnemies;i++){
+            EnnemySpawn(frontOffset);
+        }
+    }
+
+    public void CaughtMiddleEnnemiesSpawn(int numberOfEnnemies){
+        Vector3 rightOffset = transform.forward * spawnOffsetRange;
+        for (int i = 0; i < numberOfEnnemies;i++){
+            EnnemySpawn(Mathf.Pow(-1,i) * rightOffset);
+        }
+    }
+
+    public void DoomedEnnemiesSpawn(int numberOfEnnemies){
+        Vector3 rightOffset = transform.forward * spawnOffsetRange;
+        Vector3 frontOffset = transform.right * spawnOffsetRange;
+        Vector3 upOffset = transform.up * spawnOffsetRange;
+        for (int i = 0; i < numberOfEnnemies;i++){
+            switch (i % 6){
+                case 0:
+                    EnnemySpawn(rightOffset);
+                    break;
+                case 1:
+                    EnnemySpawn(-rightOffset);
+                    break;
+                case 2:
+                    EnnemySpawn(upOffset);
+                    break;
+                case 3:
+                    EnnemySpawn(-upOffset);
+                    break;
+                case 4:
+                    EnnemySpawn(-frontOffset);
+                    break;
+                case 5:
+                    EnnemySpawn(frontOffset);
+                    break;
+            }
+        }
+    }
+
+    void EnnemySpawn(Vector3 spawnOffset){
+        GameObject ennemySpaceship = Instantiate(ennemySpaceshipPrefab, transform.position + spawnOffset, transform.rotation);
+        GameObject ennemyExplosion = Instantiate(ennemyExplosionPrefab, transform.position + spawnOffset, transform.rotation);
+        GameObject ennemyHealthBar = Instantiate(ennemyHealthBarPrefab, canvasTransform);
+
+        EnnemyScript ennemyScript = ennemySpaceship.GetComponent<EnnemyScript>();
+        EnnemyPrefabScript ennemyPrefabScript = ennemyExplosion.GetComponent<EnnemyPrefabScript>();
+        EnnemyHealthBarMarker ennemyHealthBarMarker = ennemySpaceship.GetComponent<EnnemyHealthBarMarker>();
+        GameObject explosionLight = ennemyExplosion.transform.GetChild(0).gameObject;
+        GameObject explosionParticles = ennemyExplosion.transform.GetChild(1).gameObject;
+
+        //add attributes of new spaceship
+        ennemyScript.ennemyExplosion = ennemyExplosion;
+        //ennemy health bar marker
+        ennemyHealthBarMarker.healthGameObject = ennemyHealthBar;
+        ennemyHealthBarMarker.img = ennemyHealthBar.GetComponent<Image>();
+        ennemyHealthBarMarker.ennemy = ennemySpaceship;
+        ennemyHealthBarMarker.target = ennemySpaceship.transform;
+        ennemyHealthBarMarker.camera = mainCamera;
+
+        ennemyScript.healthBar = ennemyHealthBar.GetComponent<HealthBarScript>();
+        ennemyScript.healthGameObject = ennemyHealthBar;
+        ennemyScript.ennemyHealthBarMarker = ennemyHealthBarMarker;
+
+        ennemyScript.ennemyPrefabScript = ennemyPrefabScript;
+        ennemyScript.spaceship = gameObject;
+        ennemyScript.spaceshipController = this;
+        ennemyScript.explosionParticles = explosionParticles.GetComponent<ParticleSystem>(); 
+        ennemyScript.explosionLightScript = explosionLight.GetComponent<ExplosionLightScript>();
+
+        ennemyPrefabScript.ennemySpaceship = ennemySpaceship;
+
+        classicEnnemyList.Add(ennemyScript);
     }
 
     int GetAndRemoveRandomElement(HashSet<int> set)

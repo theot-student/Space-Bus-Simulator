@@ -990,6 +990,7 @@ MonoBehaviour:
   innerCamera: {fileID: 391652927}
   outerCamera: {fileID: 330585545}
   player: {fileID: 140528550}
+  healthGameObject: {fileID: 0}
 --- !u!54 &140528556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6838,7 +6839,8 @@ MonoBehaviour:
   ennemyHealthBarPrefab: {fileID: 7279914792041571426, guid: 79dcd646f8270c74fa5e7b69569ccae9, type: 3}
   canvasTransform: {fileID: 338315000}
   mainCamera: {fileID: 330585545}
-  spawnOffset: {x: 0, y: 0, z: 40}
+  usualSpawnOffset: {x: 10, y: 10, z: 10}
+  spawnOffsetRange: 30
 --- !u!136 &1991901181
 CapsuleCollider:
   m_ObjectHideFlags: 0
