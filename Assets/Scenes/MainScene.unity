@@ -1357,6 +1357,8 @@ MonoBehaviour:
   audioClips:
   - {fileID: 8300000, guid: c71ac9f4d76c0c74d8f9a96b2d31764c, type: 3}
   - {fileID: 8300000, guid: 0851608272ed2304a9968f26a02bda1f, type: 3}
+  - {fileID: 8300000, guid: 5f30f7316be145642b12937ad6881639, type: 3}
+  - {fileID: 8300000, guid: 86c175f6355b3ce4e8563b6ad4588fff, type: 3}
   audio: {fileID: 1991901185}
 --- !u!198 &384567671 stripped
 ParticleSystem:
