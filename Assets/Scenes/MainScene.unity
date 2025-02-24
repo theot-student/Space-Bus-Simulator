@@ -2073,7 +2073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -264.8, y: 164.9}
+  m_AnchoredPosition: {x: -264.8, y: 203}
   m_SizeDelta: {x: 141.9758, y: 20.0212}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458806800
@@ -2484,7 +2484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -254.3589, y: 270}
+  m_AnchoredPosition: {x: -254.3589, y: 200}
   m_SizeDelta: {x: 263.9457, y: 33.0591}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &586245574
@@ -4916,11 +4916,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722293727}
   m_CullTransparentMesh: 1
---- !u!1 &1792158482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6777156942990473451, guid: 3a79a49d450e79bb6be9de4c00860474, type: 3}
-  m_PrefabInstance: {fileID: 1618107432072206110}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1801498548
 GameObject:
   m_ObjectHideFlags: 0
@@ -6021,7 +6016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   img: {fileID: 173420747}
   target: {fileID: 0}
-  meterText: {fileID: 2111230853}
+  meterText: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   camera: {fileID: 391652927}
 --- !u!1 &1993730064

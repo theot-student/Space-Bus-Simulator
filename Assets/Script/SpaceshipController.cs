@@ -105,8 +105,8 @@ public class SpaceshipController : MonoBehaviour
     [Header("Events")]
     public float distanceEvent;
     bool eventHappened;
-    public GameObject PNJMarker;
-    public WaypointMarker PNJMarkerScript;
+    // public GameObject PNJMarker;
+    // public WaypointMarker PNJMarkerScript;
     private PNJScript passengerToHelp;
     bool pnjEventActive = false;
 
@@ -179,7 +179,7 @@ public class SpaceshipController : MonoBehaviour
                     passengerToHelp.gameObject.GetComponent<AudioSource>().Stop();
                 }
                 pnjEventActive = false;
-                PNJMarker.SetActive(false);
+                // PNJMarker.SetActive(false);
                 } 
             } else {
                 if (player.isDriving) {
@@ -396,9 +396,9 @@ public class SpaceshipController : MonoBehaviour
            choice  = Random.Range(0, passengers.Count);
         } while (passengers[choice] == null);
 
-        PNJMarkerScript.offset = new Vector3(0,0.05f,0);
-        PNJMarkerScript.target = passengers[choice].gameObject.transform;
-        PNJMarker.SetActive(true);
+        // PNJMarkerScript.offset = new Vector3(0,0.05f,0);
+        // PNJMarkerScript.target = passengers[choice].gameObject.transform;
+        // PNJMarker.SetActive(true);
         passengerToHelp = passengers[choice];
         dialogueScript.newDialogue(new string[] {"Un des passagers à besoin d'aide ! (appuyer sur C puis U pour la caméra interne)"});
         pnjEventActive = true;
