@@ -24,7 +24,7 @@ public class IntroScript : MonoBehaviour
             startDialogue = true;
         }
         if (!dialogueScript.gameObject.activeSelf & startDialogue){
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("MainScene");
         }
     }
 
